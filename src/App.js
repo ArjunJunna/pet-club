@@ -1,9 +1,13 @@
 import "./App.css";
+import AppRoutes from "./routes/AppRoutes"
+import {Header,Footer} from "./components"
 
 function App() {
   return (
-    <div className="App">
-      <h1>Pet-Club</h1>
+    <div className="dark:bg-slate-900">
+      <Header />
+      <AppRoutes />
+      <Footer />
     </div>
   );
 }
