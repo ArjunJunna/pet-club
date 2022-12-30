@@ -1,14 +1,17 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
   return (
     <>
       <nav class="sticky top-0 z-20 w-full flex justify-around items-center py-3 border-b-[0.1px] border-gray-700 dark:bg-slate-900">
-        <img
-          src="../assets/images/petclub.png"
-          alt="logo"
-          class="mr-auto pl-4 cursor-pointer h-7"
-        />
+        <Link to="/home" class="mr-auto pl-4 cursor-pointer">
+          <img
+            src="../assets/images/petclub.png"
+            alt="logo"
+             class="h-7"
+          />
+        </Link>
         <div class="bg-slate-800 rounded-full h-9 w-[25rem] border border-gray-600 focus-within:border-orange-700">
           <input
             type="text"

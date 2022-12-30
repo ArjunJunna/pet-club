@@ -38,6 +38,14 @@ export const SideBar = () => {
               <i class="bi bi-person-fill mr-3"></i>Profile
             </Link>
           </li>
+          <li class="flex items-center">
+            <Link
+              class="flex-none p-2 text-lg rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 font-semibold"
+              to="/mockapi"
+            >
+              <i class="bi bi-gear-fill"></i>
+            </Link>
+          </li>
         </ul>
       </aside>
     </>
