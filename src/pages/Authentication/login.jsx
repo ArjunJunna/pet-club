@@ -2,19 +2,24 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginHandler } from '../../features/auth/authSlice';
+import { toast } from 'react-toastify';
 
 export const Login = () => {
   const dispatch = useDispatch();
 
   const [login, setLogin] = useState({
     input: {},
+    error:"",
   });
 
   const loginInputHandler = e => {
     const { name, value } = e.target;
     setLogin({ ...login, input: { ...login.input, [name]: value } });
-    console.log(login.input);
   };
+
+   if(login.error){
+     toast.error('Login credentials invalid...');
+   }
 
   return (
     <>
@@ -47,6 +52,7 @@ export const Login = () => {
                 required
               />
             </div>
+           
             <div>
               <label
                 htmlFor="password"
