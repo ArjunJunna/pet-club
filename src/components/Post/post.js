@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const Post = () => {
   return (
@@ -16,10 +16,7 @@ export const Post = () => {
                 <p className="font-semibold">Arjun R A</p>
                 <p className="text-sm text-gray-400">@arjun_r_a</p>
               </div>
-              <time
-                datetime="1653330600000"
-                className="font-light text-normal text-gray-500 text-sm"
-              >
+              <time className="font-light text-normal text-gray-500 text-sm">
                 6 months ago
               </time>
             </div>
@@ -48,5 +45,4 @@ export const Post = () => {
       </div>
     </div>
   );
-}
-
+};

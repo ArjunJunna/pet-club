@@ -5,15 +5,15 @@ import {Link} from "react-router-dom";
 export const Home = () => {
   return (
     <>
-      <div class="flex justify-evenly text-white dark:bg-slate-900">
+      <div className="flex justify-evenly text-white dark:bg-slate-900">
         <SideBar />
-        <div class="flex flex-col grow max-w-xl z-10">
-          <h2 class="text-base p-2 font-medium">Home</h2>
+        <div className="flex flex-col grow max-w-xl z-10">
+          <h2 className="text-base p-2 font-medium">Home</h2>
           <CreatePost/>
-          <div class="text-base p-2 font-medium flex justify-between">
-            <div class="inline">Latest</div>
+          <div className="text-base p-2 font-medium flex justify-between">
+            <div className="inline">Latest</div>
             <button>
-              <i class="bi bi-sliders"></i>
+              <i className="bi bi-sliders"></i>
             </button>
           </div>
           <PostSection/>
