@@ -5,3 +5,4 @@ export {SuggestedUsers} from "./SuggestedUsers/suggestedUsers";
 export {MockAPI} from "./Mockman/mock-man";
 export {Post} from "./Post/post";
 export {PostSection} from "./PostsSection/postsSection";
+export {CreatePost} from "./CreatePost/createPost";
