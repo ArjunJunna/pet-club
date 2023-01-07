@@ -1,10 +1,19 @@
-import "./App.css";
+import './App.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AppRoutes from "./routes/AppRoutes"
-import {Header,Footer} from "./components"
+import AppRoutes from './routes/AppRoutes';
+import { Header, Footer } from './components';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getAllPosts } from './features';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllPosts());
+  }, [dispatch]);
+
   return (
     <div className="dark:bg-slate-900">
       <Header />
