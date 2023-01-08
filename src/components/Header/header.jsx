@@ -21,19 +21,20 @@ export const Header = () => {
         </div>
 
         {token ? (
-          <button className="cursor-pointer ml-auto pr-4">
-            <img
-              src={user.profileAvatar}
-              alt="avatar"
-              className="h-10 w-10 sm:h-10 sm:w-10 rounded-full  hover:cursor-pointer"
-            />
-          </button>
+          <Link to="/profile" className="ml-auto">
+            <button className="cursor-pointer  pr-4">
+              <img
+                src={user.profileAvatar}
+                alt="avatar"
+                className="h-10 w-10 sm:h-10 sm:w-10 rounded-full  hover:cursor-pointer"
+              />
+            </button>
+          </Link>
         ) : (
           <span className="cursor-pointer ml-auto pr-4 text-orange-600 font-medium">
             Welcome to Pet-Club
           </span>
-        )
-        }
+        )}
       </nav>
     </>
   );
