@@ -16,6 +16,8 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    profileAvatar:
+      'https://res.cloudinary.com/djxonmiuo/image/upload/v1672933298/pet-club-images/tomcruise_yfdilf.jpg',
     username: 'tom_cruise',
     fullName: 'Tom Cruise',
     createdAt: formatDate(),
@@ -31,6 +33,8 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    profileAvatar:
+      'https://res.cloudinary.com/djxonmiuo/image/upload/v1672933292/pet-club-images/keanu_lhlmyz.jpg',
     username: 'keanu_reeves',
     fullName: 'Keanu Reeves',
     createdAt: '2022-07-07',
@@ -76,6 +80,8 @@ export const posts = [
       ],
       dislikedBy: [],
     },
+    profileAvatar:
+      'https://res.cloudinary.com/djxonmiuo/image/upload/v1671985396/pet-club-images/ethan-hoover-0YHIlxeCuhg-unsplash_wruvij.jpg',
     username: 'ethan hoover',
     fullName: 'Enthan Hoover',
     createdAt: formatDate(),
@@ -90,6 +96,8 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    profileAvatar:
+      'https://res.cloudinary.com/djxonmiuo/image/upload/v1671985408/pet-club-images/michael-dam-mEZ3PoFGs_k-unsplash_w4tjsz.jpg',
     username: 'Sasha Henriqez',
     fullName: 'Sasha',
     createdAt: '2020-07-07',
@@ -120,6 +128,8 @@ export const posts = [
       ],
       dislikedBy: [],
     },
+    profileAvatar:
+      'https://res.cloudinary.com/djxonmiuo/image/upload/v1671985396/pet-club-images/ethan-hoover-0YHIlxeCuhg-unsplash_wruvij.jpg',
     username: 'ethan hoover',
     fullName: 'Enthan Hoover',
     createdAt: formatDate(),
@@ -158,6 +168,8 @@ export const posts = [
       ],
       dislikedBy: [],
     },
+    profileAvatar:
+      'https://res.cloudinary.com/djxonmiuo/image/upload/v1672933292/pet-club-images/keanu_lhlmyz.jpg',
     fullName: 'Keanu Reeves',
     username: 'keanu_reeves',
     createdAt: formatDate(),
@@ -210,6 +222,8 @@ export const posts = [
       ],
       dislikedBy: [],
     },
+    profileAvatar:
+      'https://res.cloudinary.com/djxonmiuo/image/upload/v1672933298/pet-club-images/tomcruise_yfdilf.jpg',
     fullName: 'Tom Cruise',
     username: 'tom_cruise',
     createdAt: formatDate(),
@@ -225,6 +239,8 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    profileAvatar:
+      'https://res.cloudinary.com/djxonmiuo/image/upload/v1671985413/pet-club-images/stefan-stefancik-QXevDflbl8A-unsplash_neaz2x.jpg',
     fullName: 'Stefanie Cruz',
     username: 'Stefanie',
     createdAt: formatDate(),

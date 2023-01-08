@@ -1,11 +1,16 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 export const CreatePost = () => {
+    const { user } = useSelector(state => state.auth);
+    const { profileAvatar } = user;
+   console.log("user:",user);
+   console.log(profileAvatar);
   return (
     <div className="grid grid-cols-[2rem_1fr] gap-2 items-start px-4 py-4 cursor-text bg-slate-800 rounded-[0.3rem]">
       <span className="cursor-pointer">
         <img
-          src="https://images.unsplash.com/photo-1502980426475-b83966705988?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=432&q=80"
+          src={profileAvatar}
           alt="arjun"
           className="h-8 w-8 sm:h-8 sm:w-8 rounded-full hover:cursor-pointer"
         />
