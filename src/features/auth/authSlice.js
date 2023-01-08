@@ -47,6 +47,7 @@ export const signUpHandler = createAsyncThunk(
 
 const initialState = {
   token: localStorage.getItem('token') || null,
+  user: JSON.parse(localStorage.getItem('user')),
   isLoading: false,
 };
 
@@ -91,5 +92,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { logoutHandler } = authSlice.actions;
-export default authSlice.reducer;
+const { logoutHandler } = authSlice.actions;
+const authReducer=authSlice.reducer;
+
+export {authReducer,logoutHandler}
