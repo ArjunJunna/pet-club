@@ -33,7 +33,7 @@ export const SideBar = () => {
           <li className="flex items-center">
             <Link
               className="flex-none p-2 text-lg rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 font-semibold"
-              to="/profile"
+              to="/profile/:username"
             >
               <i className="bi bi-person-fill mr-3"></i>Profile
             </Link>

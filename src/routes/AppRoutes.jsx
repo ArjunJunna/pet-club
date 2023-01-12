@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { Home, Profile, Explore, Bookmark, Login,SignUp } from '../pages';
+import { Home, Profile, Explore, Bookmark, Login,SignUp,SinglePostPage } from '../pages';
 import { MockAPI,ResetScroll } from '../components';
 import { PrivateRoute } from './PrivateRoute';
 import { useSelector } from 'react-redux';
@@ -16,8 +16,9 @@ const AppRoutes = () => {
             <Route path="/home" element={<Home />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/bookmarks" element={<Bookmark />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/:username" element={<Profile />} />
             <Route path="/mockapi" element={<MockAPI />} />
+            <Route path="/post/:postId" element={<SinglePostPage />} />
           </Route>
 
           {!token ? (

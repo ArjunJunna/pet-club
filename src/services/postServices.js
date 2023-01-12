@@ -58,22 +58,26 @@ const dislikePostService = async (postId, token) => {
   }
 };
 
-const createPostService=async(postDetails,token)=>{
-    try {
-        const response=await axios.post('/api/posts',{postDetails},{headers:{authorization:token}})
-        return response;
-    } catch (error) {
-        console.log(error.message);
-        return;
-    }
+const createPostService = async (postData, token) => {
+  try {
+    const response = await axios.post(
+      '/api/posts',
+      { postData },
+      { headers: { authorization: token } }
+    );
+    console.log("from post service:",response);
+    return response;
+  } catch (error) {
+    console.log(error.message);
+    return;
+  }
+};
 
-}
-
-const editPostService = async (postId, postDetails, token) => {
+const editPostService = async (postId, postData, token) => {
   try {
     const response = await axios.delete(
       `/api/posts/edit/${postId}`,
-      { postDetails },
+      { postData },
       {
         headers: { authorization: token },
       }
