@@ -1,15 +1,48 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { likePost, dislikePost } from '../../features';
 
-export const Post = ({post}) => {
-    const { username, content,fullName,profileAvatar,likes:{likeCount},comments } = post;
-    const comment=comments.length;
+export const Post = ({ post }) => {
+  const {
+    username,
+    content,
+    fullName,
+    profileAvatar,
+    likes: { likeCount, likedBy, dislikedBy },
+    comments,
+    _id,
+  } = post;
+  const comment = comments.length;
+
+  const { user, token } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const likeHandler = e => {
+    e.stopPropagation();
+    dispatch(likePost({ postId: _id, token }));
+  };
+
+  const dislikeHandler = e => {
+    e.stopPropagation();
+    dispatch(dislikePost({ postId: _id, token }));
+  };
+
   return (
-    <div className="flex flex-col gap-3">
+    <div
+      className="flex flex-col gap-3 hover:cursor-pointer"
+      onClick={() => navigate(`/post/${_id}`)}
+    >
       <div className="flex gap-3 rounded bg-slate-800 p-3">
         <img
           src={profileAvatar}
-          alt="arjun"
+          alt="profile avatar"
           className="h-12 w-12 sm:h-12 sm:w-12 rounded-full  hover:cursor-pointer"
+          onClick={e => {
+            e.stopPropagation();
+            navigate(`/profile/${username}`);
+          }}
         />
         <div className="flex flex-col flex-grow gap-1">
           <div className="flex justify-between">
@@ -28,12 +61,35 @@ export const Post = ({post}) => {
           </div>
           <p className="text-sm">{content}</p>
           <div className="flex justify-between pt-1 text-gray-400">
-            <button className="flex gap-1 dark:hover:text-green-400">
-              <i className="bi bi-hand-thumbs-up"></i>
+            <button
+              className={`flex gap-1 ${
+                likedBy.find(({ username }) => username === user.username)
+                  ? 'text-green-500 hover:text-green-500 dark:text-green-500 dark:hover:text-green-500'
+                  : 'text-black hover:text-green-500 dark:text-gray-400 dark:hover:text-green-500'
+              }`}
+              onClick={likeHandler}
+            >
+              {likedBy.find(({ username }) => username === user.username) ? (
+                <i className="bi bi-hand-thumbs-up-fill"></i>
+              ) : (
+                <i className="bi bi-hand-thumbs-up"></i>
+              )}
+
               <p className="ml-0.5">{likeCount}</p>
             </button>
-            <button className="flex gap-1 dark:hover:text-red-400">
-              <i className="bi bi-hand-thumbs-down"></i>
+            <button
+              className={`flex gap-1 ${
+                dislikedBy.find(({ username }) => username === user.username)
+                  ? 'text-red-400 hover:text-red-400 dark:text-red-400 dark:hover:text-red-400'
+                  : 'text-black hover:text-red-400 dark:text-gray-400 dark:hover:text-red-400'
+              }`}
+              onClick={dislikeHandler}
+            >
+              {dislikedBy.find(({ username }) => username === user.username) ? (
+                <i className="bi bi-hand-thumbs-down-fill"></i>
+              ) : (
+                <i className="bi bi-hand-thumbs-down"></i>
+              )}
             </button>
             <button className="flex gap-1 dark:hover:text-blue-400">
               <i className="bi bi-chat-square-text"></i>
