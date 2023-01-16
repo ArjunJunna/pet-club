@@ -1,4 +1,4 @@
-import { SideBar, SuggestedUsers, Post } from '../../components';
+import { SideBar, SuggestedUsers, Post,CommentSection } from '../../components';
 import { getUserPost } from '../../features';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
@@ -6,14 +6,14 @@ import { useParams } from 'react-router-dom';
 
 export const SinglePostPage = () => {
   const { data: post } = useSelector(state => state.post);
-  console.log('from single post: ', post);
+  
   const { data: posts } = useSelector(state => state.posts);
-  console.log('from all post: ', posts);
+  
 
   const dispatch = useDispatch();
 
   const { postId } = useParams();
-  console.log('using useParam: ', postId);
+
 
   useEffect(() => {
     dispatch(getUserPost(postId));
@@ -25,15 +25,18 @@ export const SinglePostPage = () => {
         <SideBar />
         <div className="flex flex-col grow max-w-xl z-10">
           <h2 className="text-base p-2 font-medium">Your Post</h2>
-          {post === null ? (
-            <p className="text-black text-xl m-auto dark:text-white">
-              No post to show here yet...
-            </p>
-          ) : (
-            <>
-              <Post post={post} />
-            </>
-          )}
+          <div className="flex flex-col gap-3">
+            {post === null ? (
+              <p className="text-black text-xl m-auto dark:text-white">
+                No post to show here yet...
+              </p>
+            ) : (
+              <>
+                <Post post={post} />
+                <CommentSection postId={postId} comments={post.comments} />
+              </>
+            )}
+          </div>
         </div>
         <SuggestedUsers />
       </div>
