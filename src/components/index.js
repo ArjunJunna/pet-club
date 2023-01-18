@@ -9,3 +9,4 @@ export {CreatePost} from "./CreatePost/createPost";
 export {ResetScroll} from "./ResetScroll/resetScroll";
 export {Comment} from "./Comment/comment";
 export { CommentSection } from './CommentSection/commentSection';
+export {ProfileSection} from './ProfileSection/profileSection';
