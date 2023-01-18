@@ -11,7 +11,7 @@ export const loginHandler = createAsyncThunk(
       if (status === 200) {
         localStorage.setItem('token', data.encodedToken);
         localStorage.setItem('user', JSON.stringify(data.foundUser));
-        toast.success("You are logged in...")
+        toast.success('You are logged in...');
         return data;
       }
     } catch (error) {
@@ -59,7 +59,7 @@ export const authSlice = createSlice({
       state.token = null;
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      toast.success("You are logged out...")
+      toast.success('You are logged out...');
     },
   },
 
@@ -78,21 +78,21 @@ export const authSlice = createSlice({
     // signup
     [signUpHandler.pending]: state => {
       state.isLoading = true;
-      console.log('pending');
+     
     },
     [signUpHandler.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       state.token = payload.encodedToken;
-      console.log('fulfilled');
+      
     },
     [signUpHandler.rejected]: (state, { payload }) => {
       state.loading = payload;
-      console.log('rejected');
+    
     },
   },
 });
 
 const { logoutHandler } = authSlice.actions;
-const authReducer=authSlice.reducer;
+const authReducer = authSlice.reducer;
 
-export {authReducer,logoutHandler}
+export { authReducer, logoutHandler };

@@ -3,11 +3,13 @@ import {
   getAllPostsService,
   likePostService,
   dislikePostService,
+  createPostService,
 } from '../../services/postServices';
 
 const postsInitialState = {
   data: [],
   loading: false,
+  error:"",
 };
 
 const getAllPosts = createAsyncThunk(
@@ -15,7 +17,7 @@ const getAllPosts = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await getAllPostsService();
-      console.log('posts:', data);
+     
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.errors[0]);
@@ -47,6 +49,16 @@ const dislikePost=createAsyncThunk("posts/dislikePost",async({postId,token},{rej
 
 })
 
+const createPost=createAsyncThunk("posts/createPost",async({postData,token},{rejectWithValue})=>{
+  try {
+    const {data}=await createPostService(postData,token);
+    console.log("created post:",data);
+    return data;
+  } catch (error) {
+    return rejectWithValue(error.response.data.error[0]);
+  }
+})
+
 const postsSlice = createSlice({
   name: 'posts',
   initialState: postsInitialState,
@@ -67,9 +79,17 @@ const postsSlice = createSlice({
     [dislikePost.fulfilled]: (state, action) => {
       state.data = action.payload.posts;
     },
+    [createPost.fulfilled]:(state,action)=>{
+      console.log(action);
+      state.data=action.payload.posts;
+    },
+     [createPost.rejected]:(state,action)=>{
+      console.log(action);
+      state.error=action.payload;
+    }
   },
 });
 
 const postsReducer = postsSlice.reducer;
 
-export {likePost,dislikePost,getAllPosts,postsReducer };
+export {likePost,dislikePost,getAllPosts,postsReducer,createPost };

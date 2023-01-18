@@ -6,3 +6,7 @@ export {MockAPI} from "./Mockman/mock-man";
 export {Post} from "./Post/post";
 export {PostSection} from "./PostsSection/postsSection";
 export {CreatePost} from "./CreatePost/createPost";
+export {ResetScroll} from "./ResetScroll/resetScroll";
+export {Comment} from "./Comment/comment";
+export { CommentSection } from './CommentSection/commentSection';
+export {ProfileSection} from './ProfileSection/profileSection';

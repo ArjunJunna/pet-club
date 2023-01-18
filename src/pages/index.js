@@ -4,3 +4,4 @@ export {Explore} from "./Explore/explore";
 export {Bookmark} from "./Bookmark/bookmark";
 export {Login} from "./Authentication/login";
 export {SignUp} from "./Authentication/signup";
+export {SinglePostPage} from "./SinglePostPage/singlePostPage";

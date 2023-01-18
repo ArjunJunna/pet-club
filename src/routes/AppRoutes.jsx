@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { Home, Profile, Explore, Bookmark, Login,SignUp } from '../pages';
-import { MockAPI } from '../components';
+import { Home, Profile, Explore, Bookmark, Login,SignUp,SinglePostPage } from '../pages';
+import { MockAPI,ResetScroll } from '../components';
 import { PrivateRoute } from './PrivateRoute';
 import { useSelector } from 'react-redux';
 
@@ -9,17 +9,18 @@ const AppRoutes = () => {
   const { token } = useSelector(state => state.auth);
   return (
     <>
-      <Routes>
-        <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/explore" element={<Explore />} />
-          <Route path="/bookmarks" element={<Bookmark />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/mockapi" element={<MockAPI />} />
-        </Route>
+      <ResetScroll>
+        <Routes>
+          <Route element={<PrivateRoute />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/bookmarks" element={<Bookmark />} />
+            <Route path="/profile/:username" element={<Profile />} />
+            <Route path="/mockapi" element={<MockAPI />} />
+            <Route path="/post/:postId" element={<SinglePostPage />} />
+          </Route>
 
-        
           {!token ? (
             <>
               <Route path="/login" element={<Login />} />
@@ -31,8 +32,8 @@ const AppRoutes = () => {
               <Route path="/signup" element={<Navigate to="/" replace />} />
             </>
           )}
-       
-      </Routes>
+        </Routes>
+      </ResetScroll>
     </>
   );
 };
