@@ -6,11 +6,12 @@ const getAllPostCommentsService=async(postId)=>{
 }
 
 const addPostCommentService=async(postId,commentData,token)=>{
-    const response = await axios.post(`/api/comments/add/${postId}`,commentData,{
+    const response = await axios.post(`/api/comments/add/${postId}`,{commentData},{
         headers:{
             authorization:token,
         }
     });
+    console.log("your comment data:",response);
     return response;
 }
 

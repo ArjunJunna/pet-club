@@ -1,7 +1,41 @@
-import React from 'react';
+import {useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addPostComment } from '../../features';
+import {toast} from 'react-toastify';
 import { Comment } from '../../components';
 
 export const CommentSection = ({ postId, comments }) => {
+  const [commentData, setCommentData] = useState({ comment: '' });
+  
+  const {token,user: { fullName,username, profileAvatar },} = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+
+ const addCommentHandler = async () => {
+   if (commentData.comment !== '') {
+     const response = await dispatch(
+       addPostComment({
+         postId,
+         commentData: {
+           fullName,
+           username,
+           profileAvatar,
+           comment: commentData.comment,
+         },
+         token,
+       })
+     );
+     console.log('from: ',response);
+     if (response?.payload?.comments) {
+      console.log('commented')
+       toast.success('Your comment has been created successfully!');
+       setCommentData({ ...commentData, comment: '' });
+     }
+   } else {
+     toast.error('Oops! Something went wrong...');
+   }
+ };
+
+
   return (
     <>
       <div className="flex flex-col gap-3">
@@ -12,11 +46,18 @@ export const CommentSection = ({ postId, comments }) => {
               placeholder="Add your comment ..."
               type="text"
               name="comment"
+              value={commentData.comment}
+              onChange={e =>
+                setCommentData({ ...commentData, comment: e.target.value })
+              }
               required
             />
           </div>
           <div className="comment-action">
-            <button className="text-white bg-orange-600  focus:ring-4 font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none ">
+            <button
+              className="text-white bg-orange-600  font-medium rounded-lg text-sm px-4 py-2 dark:bg-orange-600 dark:hover:bg-orange-700 focus:outline-none "
+              onClick={addCommentHandler}
+            >
               Comment
             </button>
           </div>

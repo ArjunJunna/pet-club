@@ -4,7 +4,8 @@ import {
   likePostService,
   dislikePostService,
   createPostService,
-} from '../../services/postServices';
+  addPostCommentService,
+} from '../../services';
 
 const postsInitialState = {
   data: [],
@@ -59,6 +60,18 @@ const createPost=createAsyncThunk("posts/createPost",async({postData,token},{rej
   }
 })
 
+const addPostComment = createAsyncThunk(
+  "posts/addPostComment",
+  async ({ postId, commentData, token }, { rejectWithValue }) => {
+    try {
+      const { data } = await addPostCommentService(postId, commentData, token);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.errors[0]);
+    }
+  }
+);
+
 const postsSlice = createSlice({
   name: 'posts',
   initialState: postsInitialState,
@@ -86,10 +99,17 @@ const postsSlice = createSlice({
      [createPost.rejected]:(state,action)=>{
       console.log(action);
       state.error=action.payload;
-    }
+    },
+     [addPostComment.fulfilled]: (state, action) => {
+      console.log('from add post comment: ',action)
+      state.data = action.payload.posts;
+    },
+    [addPostComment.rejected]: (state, action) => {
+      state.error = action.payload;
+    },
   },
 });
 
 const postsReducer = postsSlice.reducer;
 
-export {likePost,dislikePost,getAllPosts,postsReducer,createPost };
+export {likePost,dislikePost,getAllPosts,postsReducer,createPost,addPostComment };
