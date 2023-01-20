@@ -24,9 +24,9 @@ export const CommentSection = ({ postId, comments }) => {
          token,
        })
      );
-     console.log('from: ',response);
+    
      if (response?.payload?.comments) {
-      console.log('commented')
+      
        toast.success('Your comment has been created successfully!');
        setCommentData({ ...commentData, comment: '' });
      }

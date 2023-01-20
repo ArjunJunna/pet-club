@@ -12,7 +12,7 @@ const getUserPost = createAsyncThunk(
   async (postId, { rejectWithValue }) => {
     try {
       const { data } = await getUserPostService(postId);
-      console.log('from user post:',data);
+     
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.errors[0]);
@@ -29,7 +29,6 @@ const postSlice = createSlice({
     },
     [getUserPost.fulfilled]: (state, action) => {
       state.loading = false;
-      console.log('from single post',action);
       state.data = action.payload.post;
     },
     [getUserPost.rejected]: state => {
