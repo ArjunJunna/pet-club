@@ -4,6 +4,7 @@ import {
   addPostToBookmarksService,
   removePostFromBookmarksService,
 } from '../../services';
+import { toast } from 'react-toastify';
 
 const bookmarksInitialState = {
   data: [],
@@ -28,6 +29,7 @@ const addPostToBookmarks = createAsyncThunk(
   async ({ postId, token }, { rejectWithValue }) => {
     try {
       const { data } = await addPostToBookmarksService(postId, token);
+      toast.success('Post added to the bookmarks.');
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.errors[0]);
@@ -40,7 +42,7 @@ const removePostFromBookmarks = createAsyncThunk(
   async ({ postId, token }, { rejectWithValue }) => {
     try {
       const { data } = await removePostFromBookmarksService(postId, token);
-      console.log('you removed the post from bookmarks');
+      toast.success('Post removed from the bookmarks.');
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.errors[0]);
