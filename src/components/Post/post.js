@@ -1,7 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { likePost, dislikePost } from '../../features';
+import {
+  likePost,
+  dislikePost,
+  addPostToBookmarks,
+  removePostFromBookmarks,
+} from '../../features';
 
 export const Post = ({ post }) => {
   const {
@@ -16,6 +21,7 @@ export const Post = ({ post }) => {
   const comment = comments.length;
 
   const { user, token } = useSelector(state => state.auth);
+  const { data: bookmarks } = useSelector(state => state.bookmarks);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -27,6 +33,16 @@ export const Post = ({ post }) => {
   const dislikeHandler = e => {
     e.stopPropagation();
     dispatch(dislikePost({ postId: _id, token }));
+  };
+
+  const addPostToBookmarksHandler = e => {
+    e.stopPropagation();
+    dispatch(addPostToBookmarks({ postId: _id, token }));
+  };
+
+  const removePostFromBookmarksHandler = e => {
+    e.stopPropagation();
+    dispatch(removePostFromBookmarks({ postId: _id, token }));
   };
 
   return (
@@ -95,9 +111,21 @@ export const Post = ({ post }) => {
               <i className="bi bi-chat-square-text"></i>
               <p className="ml-0.5">{comment}</p>
             </button>
-            <button className="flex gap-1 dark:hover:text-orange-400">
-              <i className="bi bi-bookmark"></i>
-            </button>
+            {bookmarks.find(post => post._id === _id) ? (
+              <button
+                className="flex gap-1 text-orange-600 dark:hover:text-orange-400"
+                onClick={removePostFromBookmarksHandler}
+              >
+                <i className="bi bi-bookmark-check-fill"></i>
+              </button>
+            ) : (
+              <button
+                className="flex gap-1 dark:hover:text-orange-400"
+                onClick={addPostToBookmarksHandler}
+              >
+                <i className="bi bi-bookmark"></i>
+              </button>
+            )}
           </div>
         </div>
       </div>

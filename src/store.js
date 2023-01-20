@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authReducer, postsReducer,postReducer,userReducer } from './features';
+import { authReducer, postsReducer,postReducer,userReducer,bookmarksReducer } from './features';
 
 export const store=configureStore({
     reducer:{
@@ -7,5 +7,6 @@ export const store=configureStore({
         posts:postsReducer,
         post:postReducer,
         user:userReducer,
+        bookmarks:bookmarksReducer,
     },
 });
