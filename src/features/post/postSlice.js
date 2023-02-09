@@ -5,6 +5,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 const postInitialState = {
   data: null,
   loading: false,
+  activeSort: 'Latest',
 };
 
 const getUserPost = createAsyncThunk(
@@ -12,7 +13,7 @@ const getUserPost = createAsyncThunk(
   async (postId, { rejectWithValue }) => {
     try {
       const { data } = await getUserPostService(postId);
-     
+
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.errors[0]);
@@ -23,6 +24,11 @@ const getUserPost = createAsyncThunk(
 const postSlice = createSlice({
   name: 'post',
   initialState: postInitialState,
+  reducers: {
+    setActiveSort: (state, { payload }) => {
+      state.activeSort = payload;
+    },
+  },
   extraReducers: {
     [getUserPost.pending]: state => {
       state.loading = true;
@@ -38,5 +44,7 @@ const postSlice = createSlice({
 });
 
 const postReducer = postSlice.reducer;
+
+export const { setActiveSort } = postSlice.actions;
 
 export { getUserPost, postReducer };

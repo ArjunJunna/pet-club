@@ -5,13 +5,14 @@ import AppRoutes from './routes/AppRoutes';
 import { Header, Footer } from './components';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getAllPosts } from './features';
+import { getAllPosts,getAllUsers } from './features';
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllPosts());
+    dispatch(getAllUsers());
   }, [dispatch]);
 
   return (

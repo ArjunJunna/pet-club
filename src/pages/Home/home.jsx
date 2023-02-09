@@ -4,6 +4,7 @@ import {
   SuggestedUsers,
   PostSection,
   CreatePost,
+  SortBar
 } from '../../components';
 import { useSelector } from 'react-redux';
 import { giveFeedPosts } from '../../utilities/js/getFeedPosts';
@@ -23,12 +24,7 @@ export const Home = () => {
         <div className="flex flex-col grow max-w-xl z-10">
           <h2 className="text-base p-2 font-medium">Home</h2>
           <CreatePost />
-          <div className="text-base p-2 font-medium flex justify-between">
-            <div className="inline">Latest</div>
-            <button>
-              <i className="bi bi-sliders"></i>
-            </button>
-          </div>
+          <SortBar/>
           <PostSection posts={feedPosts} />
         </div>
         <SuggestedUsers />

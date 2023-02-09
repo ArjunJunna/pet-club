@@ -53,13 +53,13 @@ export const ProfileSection = ({ profile }) => {
         </div>
         <div className="flex gap-4">
           <div className="flex gap-1">
-            <p className="text-sm font-bold sm:text-md">2</p>
+            <p className="text-sm font-bold sm:text-md">1</p>
             <p className="text-sm font-light dark:text-gray-400 sm:text-md">
               Following
             </p>
           </div>
           <div className="flex gap-1">
-            <p className="text-sm font-bold sm:text-md">4</p>
+            <p className="text-sm font-bold sm:text-md">2</p>
             <p className="text-sm font-light dark:text-gray-400 sm:text-md">
               Followers
             </p>
