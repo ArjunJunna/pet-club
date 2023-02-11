@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -24,6 +24,7 @@ export const Post = ({ post }) => {
   const { data: bookmarks } = useSelector(state => state.bookmarks);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [showPostOptions, setShowPostOptions] = useState(false);
 
   const likeHandler = e => {
     e.stopPropagation();
@@ -46,10 +47,7 @@ export const Post = ({ post }) => {
   };
 
   return (
-    <div
-      className="flex flex-col gap-3 hover:cursor-pointer"
-      onClick={() => navigate(`/post/${_id}`)}
-    >
+    <div className="flex flex-col gap-3 hover:cursor-pointer relative">
       <div className="flex gap-3 rounded bg-slate-800 p-3">
         <img
           src={profileAvatar}
@@ -71,11 +69,27 @@ export const Post = ({ post }) => {
                 6 months ago
               </time>
             </div>
-            <button className="text-gray-400 ml-auto pb-6">
+            <button
+              className="text-gray-400 ml-auto pb-6"
+              onClick={() => setShowPostOptions(prev => !prev)}
+            >
               <i className="bi bi-three-dots-vertical"></i>
             </button>
+            {showPostOptions ? (
+              <div className="absolute top-10 right-6 text-sm flex flex-col gap-1.5 items-start bg-slate-800 rounded shadow-slate-900 shadow-xl  z-10 text-slate-100  text-center border border-slate-500">
+                <button className="cursor-pointer hover:bg-slate-700 py-2 w-28 rounded">
+                  Edit Post
+                </button>
+
+                <button className="cursor-pointer hover:bg-slate-700 py-2 w-28 rounded">
+                  Delete Post
+                </button>
+              </div>
+            ) : null}
           </div>
-          <p className="text-sm">{content}</p>
+          <p className="text-sm" onClick={() => navigate(`/post/${_id}`)}>
+            {content}
+          </p>
           <div className="flex justify-between pt-1 text-gray-400">
             <button
               className={`flex gap-1 ${

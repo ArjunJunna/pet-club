@@ -66,15 +66,8 @@ export const ProfileSection = ({ profile }) => {
           </div>
         </div>
       </div>
-      <Link to="/login" className="ml-auto">
-        <button
-          title="Logout"
-          onClick={() => {
-            dispatch(logoutHandler());
-          }}
-        >
-          <i className="bi bi-box-arrow-right"></i>
-        </button>
+      <Link to="#" className="ml-auto">
+        <button className="rounded-3xl bg-slate-800 py-2 px-3">Edit</button>
       </Link>
     </div>
   );

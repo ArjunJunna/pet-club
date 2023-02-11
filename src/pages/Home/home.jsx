@@ -8,15 +8,17 @@ import {
 } from '../../components';
 import { useSelector } from 'react-redux';
 import { giveFeedPosts } from '../../utilities/js/getFeedPosts';
+import { sortByDate } from '../../utilities/js/getSortByDate';
 
 export const Home = () => {
-  const { data: posts } = useSelector(state => state.posts);
+  const { data: posts,activeSort } = useSelector(state => state.posts);
   const {
     user: { following, username },
   } = useSelector(state => state.auth);
 
   const feedPosts = giveFeedPosts(posts, following, username);
   
+  const sortedPosts = sortByDate(feedPosts, activeSort);
   return (
     <>
       <div className="flex justify-evenly text-white dark:bg-slate-900">
@@ -25,7 +27,7 @@ export const Home = () => {
           <h2 className="text-base p-2 font-medium">Home</h2>
           <CreatePost />
           <SortBar/>
-          <PostSection posts={feedPosts} />
+          <PostSection posts={sortedPosts} />
         </div>
         <SuggestedUsers />
       </div>

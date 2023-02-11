@@ -4,7 +4,6 @@ import { getSuggestedUsers } from '../../utilities/js/getSuggestedUsers';
 import { SuggestedUserCard } from './suggestedUserCard';
 
 export const SuggestedUsers = () => {
-
   const { username, following } = useSelector(state => state.auth.user);
   const { data: users } = useSelector(state => state.users);
   const suggestedUsers = getSuggestedUsers(users, username, following);
@@ -16,7 +15,6 @@ export const SuggestedUsers = () => {
           {suggestedUsers.slice(0, 5).map(user => (
             <SuggestedUserCard key={user._id} {...user} />
           ))}
-       
         </div>
       </div>
     </>

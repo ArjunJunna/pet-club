@@ -40,15 +40,15 @@ export const Header = () => {
             </button>
 
             {showUserModal ? (
-              <div className="absolute top-12 right-8 text-sm flex flex-col gap-1.5 items-start bg-slate-800 rounded shadow-slate-900 shadow-xl  z-10 text-slate-100  text-center">
+              <div className="absolute top-12 right-8 text-sm flex flex-col gap-1.5 items-start bg-slate-800 rounded shadow-slate-900 shadow-xl  z-10 text-slate-100  text-center border border-slate-500">
                 <Link to={`/profile/${username}`}>
-                  <div className="cursor-pointer hover:bg-slate-700 py-2 px-4 w-24">
+                  <div className="cursor-pointer hover:bg-slate-700 py-2 px-4 w-24 rounded">
                     Profile
                   </div>
                 </Link>
 
                 <div
-                  className="cursor-pointer hover:bg-slate-700 py-2 px-4 w-24"
+                  className="cursor-pointer hover:bg-slate-700 py-2 px-4 w-24 rounded"
                   onClick={() => {
                     dispatch(logoutHandler());
                   }}

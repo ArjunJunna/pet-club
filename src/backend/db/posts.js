@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { formatDate } from "../utils/authUtils";
+//import { formatDate } from "../utils/authUtils";
 
 /**
  * Posts can be added here.
@@ -20,8 +20,8 @@ export const posts = [
       'https://res.cloudinary.com/djxonmiuo/image/upload/v1672933298/pet-club-images/tomcruise_yfdilf.jpg',
     username: 'tom_cruise',
     fullName: 'Tom Cruise',
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: new Date('June 21, 2022'),
+    updatedAt: new Date('june 21, 2022'),
     comments: [],
   },
   {
@@ -37,8 +37,8 @@ export const posts = [
       'https://res.cloudinary.com/djxonmiuo/image/upload/v1672933292/pet-club-images/keanu_lhlmyz.jpg',
     username: 'keanu_reeves',
     fullName: 'Keanu Reeves',
-    createdAt: '2022-07-07',
-    updatedAt: formatDate(),
+    createdAt: new Date('July 14, 2022'),
+    updatedAt: new Date('July 14, 2022'),
     comments: [
       {
         _id: uuid(),
@@ -47,8 +47,8 @@ export const posts = [
         username: 'Sergio',
         profileAvatar:
           'https://res.cloudinary.com/djxonmiuo/image/upload/v1671985411/pet-club-images/sergio-de-paula-c_GmwfHBDzk-unsplash_vkvwf1.jpg',
-        createdAt: '2022-07-07',
-        updatedAt: formatDate(),
+        createdAt: new Date('July 14, 2022'),
+        updatedAt: new Date('July 14, 2022'),
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -84,8 +84,8 @@ export const posts = [
       'https://res.cloudinary.com/djxonmiuo/image/upload/v1671985396/pet-club-images/ethan-hoover-0YHIlxeCuhg-unsplash_wruvij.jpg',
     username: 'ethan hoover',
     fullName: 'Enthan Hoover',
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: new Date('June 14, 2022'),
+    updatedAt: new Date('June 14, 2022'),
     comments: [],
   },
   {
@@ -100,8 +100,8 @@ export const posts = [
       'https://res.cloudinary.com/djxonmiuo/image/upload/v1671985408/pet-club-images/michael-dam-mEZ3PoFGs_k-unsplash_w4tjsz.jpg',
     username: 'Sasha Henriqez',
     fullName: 'Sasha',
-    createdAt: '2020-07-07',
-    updatedAt: formatDate(),
+    createdAt: new Date('June 10, 2022'),
+    updatedAt: new Date('June 10, 2022'),
     comments: [],
   },
   {
@@ -132,8 +132,8 @@ export const posts = [
       'https://res.cloudinary.com/djxonmiuo/image/upload/v1671985396/pet-club-images/ethan-hoover-0YHIlxeCuhg-unsplash_wruvij.jpg',
     username: 'ethan hoover',
     fullName: 'Enthan Hoover',
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: new Date('July 10, 2022'),
+    updatedAt: new Date('July 10, 2022'),
     comments: [
       {
         _id: uuid(),
@@ -142,8 +142,8 @@ export const posts = [
         username: 'Sergio',
         profileAvatar:
           'https://res.cloudinary.com/djxonmiuo/image/upload/v1671985411/pet-club-images/sergio-de-paula-c_GmwfHBDzk-unsplash_vkvwf1.jpg',
-        createdAt: formatDate(),
-        updatedAt: formatDate(),
+        createdAt: new Date('July 10, 2022'),
+        updatedAt: new Date('July 10, 2022'),
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -172,8 +172,8 @@ export const posts = [
       'https://res.cloudinary.com/djxonmiuo/image/upload/v1672933292/pet-club-images/keanu_lhlmyz.jpg',
     fullName: 'Keanu Reeves',
     username: 'keanu_reeves',
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: new Date('July 11, 2022'),
+    updatedAt: new Date('July 11, 2022'),
     comments: [
       {
         _id: uuid(),
@@ -182,8 +182,8 @@ export const posts = [
         username: 'Stefanie',
         profileAvatar:
           'https://res.cloudinary.com/djxonmiuo/image/upload/v1671985413/pet-club-images/stefan-stefancik-QXevDflbl8A-unsplash_neaz2x.jpg',
-        createdAt: formatDate(),
-        updatedAt: formatDate(),
+        createdAt: new Date('July 11, 2022'),
+        updatedAt: new Date('July 11, 2022'),
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -226,8 +226,8 @@ export const posts = [
       'https://res.cloudinary.com/djxonmiuo/image/upload/v1672933298/pet-club-images/tomcruise_yfdilf.jpg',
     fullName: 'Tom Cruise',
     username: 'tom_cruise',
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: new Date('June 10, 2022'),
+    updatedAt: new Date('June 10, 2022'),
     comments: [],
   },
   {
@@ -243,8 +243,8 @@ export const posts = [
       'https://res.cloudinary.com/djxonmiuo/image/upload/v1671985413/pet-club-images/stefan-stefancik-QXevDflbl8A-unsplash_neaz2x.jpg',
     fullName: 'Stefanie Cruz',
     username: 'Stefanie',
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
+    createdAt: new Date('July 10, 2022'),
+    updatedAt: new Date('July 10, 2022'),
     comments: [
       {
         _id: uuid(),
@@ -253,8 +253,8 @@ export const posts = [
         username: 'Sergio',
         profileAvatar:
           'https://res.cloudinary.com/djxonmiuo/image/upload/v1671985411/pet-club-images/sergio-de-paula-c_GmwfHBDzk-unsplash_vkvwf1.jpg',
-        createdAt: formatDate(),
-        updatedAt: formatDate(),
+        createdAt: new Date('July 10, 2022'),
+        updatedAt: new Date('July 10, 2022'),
         votes: {
           upvotedBy: [],
           downvotedBy: [],
@@ -267,8 +267,8 @@ export const posts = [
         username: 'Sasha',
         profileAvatar:
           'https://res.cloudinary.com/djxonmiuo/image/upload/v1671985408/pet-club-images/michael-dam-mEZ3PoFGs_k-unsplash_w4tjsz.jpg',
-        createdAt: formatDate(),
-        updatedAt: formatDate(),
+        createdAt: new Date('May 16, 2022'),
+        updatedAt: new Date('May 16, 2022'),
         votes: {
           upvotedBy: [],
           downvotedBy: [],
