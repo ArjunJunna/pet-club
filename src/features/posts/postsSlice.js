@@ -5,7 +5,10 @@ import {
   dislikePostService,
   createPostService,
   addPostCommentService,
+  editPostService,
+  deletePostService,
 } from '../../services';
+import { toast } from 'react-toastify';
 
 const postsInitialState = {
   data: [],
@@ -78,6 +81,32 @@ const addPostComment = createAsyncThunk(
   }
 );
 
+const editPost=createAsyncThunk(
+  'posts/editPost',
+  async({postId,postData,token},{rejectWithValue})=>{ 
+    try{
+      const { data } = await editPostService(postId, postData, token);
+      toast.success('Post is updated successfully.')
+      return data;
+    }catch(error){
+      return rejectWithValue(error.response.data.errors[0]);
+    }
+  }
+);
+
+const deletePost = createAsyncThunk(
+  'posts/deletePost',
+  async ({ postId, token }, { rejectWithValue }) => {
+    try {
+      const { data } = await deletePostService(postId, token);
+      toast.success("Post deleted.");
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.errors[0]);
+    }
+  }
+);
+
 const postsSlice = createSlice({
   name: 'posts',
   initialState: postsInitialState,
@@ -109,6 +138,12 @@ const postsSlice = createSlice({
     [createPost.rejected]: (state, action) => {
       state.error = action.payload;
     },
+    [editPost.fulfilled]: (state, action) => {
+      state.data = action.payload.posts;
+    },
+    [deletePost.fulfilled]: (state, action) => {
+      state.data = action.payload.posts;
+    },
     [addPostComment.fulfilled]: (state, action) => {
       state.data = action.payload.posts;
     },
@@ -129,4 +164,6 @@ export {
   postsReducer,
   createPost,
   addPostComment,
+  editPost,
+  deletePost,
 };

@@ -5,7 +5,7 @@ import { logoutHandler } from '../../features';
 
 export const Header = () => {
   const { user, token } = useSelector(state => state.auth);
-  //const { username } = user;
+  const { username } = user;
   const dispatch = useDispatch();
   const [showUserModal, setShowUserModal] = useState(false);
   //console.log('user',user);
@@ -42,9 +42,11 @@ export const Header = () => {
 
             {showUserModal ? (
               <div className="absolute top-12 right-8 text-sm flex flex-col gap-1.5 items-start bg-slate-800 rounded shadow-slate-900 shadow-xl  z-10 text-slate-100  text-center border border-slate-500">
-                <div className="cursor-pointer hover:bg-slate-700 py-2 px-4 w-24 rounded">
-                  Profile
-                </div>
+                <Link to={`/profile/${username}`}>
+                  <div className="cursor-pointer hover:bg-slate-700 py-2 px-4 w-24 rounded">
+                    Profile
+                  </div>
+                </Link>
 
                 <div
                   className="cursor-pointer hover:bg-slate-700 py-2 px-4 w-24 rounded"

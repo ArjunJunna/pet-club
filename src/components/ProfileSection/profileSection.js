@@ -1,10 +1,17 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logoutHandler } from '../../features';
+import { EditProfileModal } from './editProfileModal';
+import { useState } from 'react';
+import { getUser } from '../../features';
 
 export const ProfileSection = ({ profile }) => {
   const dispatch = useDispatch();
+   useEffect(() => {
+     dispatch(getUser());
+   }, [dispatch]);
   const {
     fullName,
     profileAvatar,
@@ -14,6 +21,8 @@ export const ProfileSection = ({ profile }) => {
     followers,
     following,
   } = profile;
+  const [editProfileModal, setIsEditProfileModal] = useState(false);
+  console.log(followers,following);
 
   return (
     <div className="flex p-4 gap-5">
@@ -66,9 +75,19 @@ export const ProfileSection = ({ profile }) => {
           </div>
         </div>
       </div>
-      <Link to="#" className="ml-auto">
-        <button className="rounded-3xl bg-slate-800 py-2 px-3">Edit</button>
-      </Link>
+
+      <button
+        className="rounded-3xl bg-slate-600 font-semibold  ml-auto h-8 w-24 hover:bg-slate-800"
+        onClick={() => {
+          setIsEditProfileModal(true);
+        }}
+      >
+        Edit Profile
+      </button>
+
+      {editProfileModal && <EditProfileModal setIsEditProfileModal={setIsEditProfileModal}  
+      {...profile}
+      />}
     </div>
   );
 };

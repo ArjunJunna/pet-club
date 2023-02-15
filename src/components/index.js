@@ -12,3 +12,4 @@ export {Comment} from "./Comment/comment";
 export { CommentSection } from './CommentSection/commentSection';
 export {ProfileSection} from './ProfileSection/profileSection';
 export {SortBar} from './SortBar/sortBar';
+export {EditProfileModal} from './ProfileSection/editProfileModal';

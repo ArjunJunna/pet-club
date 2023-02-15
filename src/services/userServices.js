@@ -5,6 +5,19 @@ const getUserService = async username => {
   return response;
 };
 
+const editUserService = async (userData, token) => {
+  const response = await axios.post(
+    `/api/users/edit`,
+    { userData },
+    {
+      headers: {
+        authorization: token,
+      },
+    }
+  );
+  return response;
+};
+
 const getAllUsersService = async () => {
   const response = await axios.get('/api/users');
   return response;
@@ -41,4 +54,5 @@ export {
   getAllUsersService,
   followUserService,
   unFollowUserService,
+  editUserService,
 };

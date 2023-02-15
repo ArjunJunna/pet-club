@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { getAllUserPosts, getUser } from '../../features';
 
 export const Profile = () => {
+  const { data: users } = useSelector(state => state.users);
   const dispatch = useDispatch();
   const { username } = useParams();
   const {

@@ -12,9 +12,9 @@ const usersInitialState = {
 
 const getAllUsers = createAsyncThunk(
   'users/getAllUsers',
-  async (_, { rejectWithValue }) => {
+  async (username, { rejectWithValue }) => {
     try {
-      const { data } = await getAllUsersService();
+      const { data } = await getAllUsersService(username);
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.errors[0]);

@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   likePost,
   dislikePost,
   addPostToBookmarks,
   removePostFromBookmarks,
+  editPost,
+  deletePost,
 } from '../../features';
+import Moment from 'react-moment';
+import { EditPostModal } from './editPostModal';
 
 export const Post = ({ post }) => {
   const {
@@ -14,17 +18,22 @@ export const Post = ({ post }) => {
     content,
     fullName,
     profileAvatar,
+    updatedAt,
     likes: { likeCount, likedBy, dislikedBy },
     comments,
     _id,
   } = post;
+
   const comment = comments.length;
 
   const { user, token } = useSelector(state => state.auth);
   const { data: bookmarks } = useSelector(state => state.bookmarks);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [showPostOptions, setShowPostOptions] = useState(false);
+  const [editPostModal, setEditPostModal] = useState(false);
+  const [postData, setPostData] = useState({ content });
 
   const likeHandler = e => {
     e.stopPropagation();
@@ -46,6 +55,17 @@ export const Post = ({ post }) => {
     dispatch(removePostFromBookmarks({ postId: _id, token }));
   };
 
+  const editPostHandler = e => {
+    dispatch(editPost({ postId: _id, postData, token }));
+  };
+
+  const deletePostHandler = e => {
+    if (pathname === '/bookmarks') {
+      dispatch(removePostFromBookmarks({ postId: _id, token }));
+    }
+    dispatch(deletePost({ postId: _id, token }));
+  };
+
   return (
     <div className="flex flex-col gap-3 hover:cursor-pointer relative">
       <div className="flex gap-3 rounded bg-slate-800 p-3">
@@ -65,23 +85,35 @@ export const Post = ({ post }) => {
                 <p className="font-semibold">{fullName}</p>
                 <p className="text-sm text-gray-400">@{username}</p>
               </div>
-              <time className="font-light text-normal pt-0.5 text-gray-500 text-sm">
-                6 months ago
-              </time>
+              <Moment
+                fromNow
+                className="font-light text-normal pt-0.5 text-gray-500 text-sm"
+              >
+                {updatedAt}
+              </Moment>
             </div>
-            <button
-              className="text-gray-400 ml-auto pb-6"
-              onClick={() => setShowPostOptions(prev => !prev)}
-            >
-              <i className="bi bi-three-dots-vertical"></i>
-            </button>
+            {user.username === username && (
+              <button
+                className="text-gray-400 ml-auto pb-6"
+                onClick={() => setShowPostOptions(prev => !prev)}
+              >
+                <i className="bi bi-three-dots-vertical"></i>
+              </button>
+            )}
+
             {showPostOptions ? (
               <div className="absolute top-10 right-6 text-sm flex flex-col gap-1.5 items-start bg-slate-800 rounded shadow-slate-900 shadow-xl  z-10 text-slate-100  text-center border border-slate-500">
-                <button className="cursor-pointer hover:bg-slate-700 py-2 w-28 rounded">
+                <button
+                  className="cursor-pointer hover:bg-slate-700 py-2 w-28 rounded"
+                  onClick={() => setEditPostModal(true)}
+                >
                   Edit Post
                 </button>
 
-                <button className="cursor-pointer hover:bg-slate-700 py-2 w-28 rounded">
+                <button
+                  className="cursor-pointer hover:bg-slate-700 py-2 w-28 rounded"
+                  onClick={() => deletePostHandler()}
+                >
                   Delete Post
                 </button>
               </div>
@@ -143,6 +175,15 @@ export const Post = ({ post }) => {
           </div>
         </div>
       </div>
+      {editPostModal && (
+        <EditPostModal
+          setEditPostModal={setEditPostModal}
+          postData={postData}
+          setPostData={setPostData}
+          editPostHandler={editPostHandler}
+          {...post}
+        />
+      )}
     </div>
   );
 };

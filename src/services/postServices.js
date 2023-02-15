@@ -75,7 +75,7 @@ const createPostService = async (postData, token) => {
 
 const editPostService = async (postId, postData, token) => {
   try {
-    const response = await axios.delete(
+    const response = await axios.post(
       `/api/posts/edit/${postId}`,
       { postData },
       {

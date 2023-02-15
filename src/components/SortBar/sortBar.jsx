@@ -8,7 +8,7 @@ export const SortBar = () => {
   const [showSortModal, setShowSortModal] = useState(false);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  console.log(pathname);
+  
   
   return (
     <div className="text-base p-2 font-medium flex justify-between relative">
