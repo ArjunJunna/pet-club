@@ -5,10 +5,9 @@ import { logoutHandler } from '../../features';
 
 export const Header = () => {
   const { user, token } = useSelector(state => state.auth);
-  const { username } = user;
+  const { username } = user??{};
   const dispatch = useDispatch();
   const [showUserModal, setShowUserModal] = useState(false);
-  //console.log('user',user);
 
   return (
     <>
@@ -34,7 +33,7 @@ export const Header = () => {
               }}
             >
               <img
-                src={user.profileAvatar}
+                src={user?.profileAvatar}
                 alt="avatar"
                 className="h-10 w-10 sm:h-10 sm:w-10 rounded-full  hover:cursor-pointer"
               />

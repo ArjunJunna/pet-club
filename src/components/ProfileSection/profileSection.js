@@ -1,8 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { logoutHandler } from '../../features';
 import { EditProfileModal } from './editProfileModal';
 import { useState } from 'react';
 import { getUser } from '../../features';
@@ -18,11 +16,10 @@ export const ProfileSection = ({ profile }) => {
     username,
     bio,
     website,
-    followers,
-    following,
+    followers=[],
+    following=[],
   } = profile;
   const [editProfileModal, setIsEditProfileModal] = useState(false);
-  console.log(followers,following);
 
   return (
     <div className="flex p-4 gap-5">
@@ -62,13 +59,13 @@ export const ProfileSection = ({ profile }) => {
         </div>
         <div className="flex gap-4">
           <div className="flex gap-1">
-            <p className="text-sm font-bold sm:text-md">1</p>
+            <p className="text-sm font-bold sm:text-md">{following.length}</p>
             <p className="text-sm font-light dark:text-gray-400 sm:text-md">
               Following
             </p>
           </div>
           <div className="flex gap-1">
-            <p className="text-sm font-bold sm:text-md">2</p>
+            <p className="text-sm font-bold sm:text-md">{followers.length}</p>
             <p className="text-sm font-light dark:text-gray-400 sm:text-md">
               Followers
             </p>
