@@ -1,24 +1,32 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useState,useRef } from 'react';
 import { setActiveSort } from '../../features';
 import { useLocation } from 'react-router-dom';
+import useOnClickOutside from '../../utilities/js/useOnClickOutside';
 
 export const SortBar = () => {
   const { activeSort } = useSelector(state => state.posts);
   const [showSortModal, setShowSortModal] = useState(false);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  
+   const ref = useRef();
+
+   const handlerRef = () => {
+     setShowSortModal(false);
+   };
+   useOnClickOutside(ref, handlerRef);
   
   return (
     <div className="text-base p-2 font-medium flex justify-between relative">
-     
       <div className="inline">Sort By</div>
       <button onClick={() => setShowSortModal(prev => !prev)}>
         <i className="bi bi-sliders"></i>
       </button>
       {showSortModal ? (
-        <div className="absolute top-8 right-4 w-max text-sm flex flex-col gap-1.5 items-start py-2 px-3 bg-slate-800 rounded shadow-slate-900 shadow-xl  z-10">
+        <div
+          className="absolute top-8 right-4 w-max text-sm flex flex-col gap-1.5 items-start py-2 px-3 bg-slate-800 rounded shadow-slate-900 shadow-xl  z-10"
+          ref={ref}
+        >
           {pathname === '/explore' ? (
             <button
               style={{ color: activeSort === 'Trending' ? '#e34b05' : '' }}

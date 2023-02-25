@@ -1,13 +1,19 @@
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { logoutHandler } from '../../features';
+import useOnClickOutside from '../../utilities/js/useOnClickOutside';
 
 export const Header = () => {
   const { user, token } = useSelector(state => state.auth);
   const { username } = user??{};
   const dispatch = useDispatch();
   const [showUserModal, setShowUserModal] = useState(false);
+  const ref =useRef();
+  const handlerRef = () => {
+    setShowUserModal(false);
+  };
+  useOnClickOutside(ref, handlerRef);
 
   return (
     <>
@@ -40,7 +46,7 @@ export const Header = () => {
             </button>
 
             {showUserModal ? (
-              <div className="absolute top-12 right-8 text-sm flex flex-col gap-1.5 items-start bg-slate-800 rounded shadow-slate-900 shadow-xl  z-10 text-slate-100  text-center border border-slate-500">
+              <div className="absolute top-12 right-8 text-sm flex flex-col gap-1.5 items-start bg-slate-800 rounded shadow-slate-900 shadow-xl  z-10 text-slate-100  text-center border border-slate-500" ref={ref}>
                 <Link to={`/profile/${username}`}>
                   <div className="cursor-pointer hover:bg-slate-700 py-2 px-4 w-24 rounded">
                     Profile

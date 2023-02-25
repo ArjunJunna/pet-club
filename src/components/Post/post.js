@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -11,6 +11,7 @@ import {
 } from '../../features';
 import Moment from 'react-moment';
 import { EditPostModal } from './editPostModal';
+import useOnClickOutside from '../../utilities/js/useOnClickOutside';
 
 export const Post = ({ post }) => {
   const {
@@ -34,6 +35,13 @@ export const Post = ({ post }) => {
   const [showPostOptions, setShowPostOptions] = useState(false);
   const [editPostModal, setEditPostModal] = useState(false);
   const [postData, setPostData] = useState({ content });
+
+  const ref = useRef();
+
+  const handlerRef = () => {
+    setShowPostOptions(false);
+  };
+  useOnClickOutside(ref, handlerRef);
 
   const likeHandler = e => {
     e.stopPropagation();
@@ -102,7 +110,10 @@ export const Post = ({ post }) => {
             )}
 
             {showPostOptions ? (
-              <div className="absolute top-10 right-6 text-sm flex flex-col gap-1.5 items-start bg-slate-800 rounded shadow-slate-900 shadow-xl  z-10 text-slate-100  text-center border border-slate-500">
+              <div
+                className="absolute top-10 right-6 text-sm flex flex-col gap-1.5 items-start bg-slate-800 rounded shadow-slate-900 shadow-xl  z-10 text-slate-100  text-center border border-slate-500"
+                ref={ref}
+              >
                 <button
                   className="cursor-pointer hover:bg-slate-700 py-2 w-28 rounded"
                   onClick={() => setEditPostModal(true)}
