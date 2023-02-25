@@ -1,25 +1,27 @@
-import React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { EditProfileModal } from './editProfileModal';
-import { useState } from 'react';
 import { getUser } from '../../features';
+import { FollowersUserModal } from './followersUserModal';
+import { FollowingUserModal } from './followingUserModal';
 
 export const ProfileSection = ({ profile }) => {
   const dispatch = useDispatch();
-   useEffect(() => {
-     dispatch(getUser());
-   }, [dispatch]);
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch]);
   const {
     fullName,
     profileAvatar,
     username,
     bio,
     website,
-    followers=[],
-    following=[],
+    followers = [],
+    following = [],
   } = profile;
   const [editProfileModal, setIsEditProfileModal] = useState(false);
+  const [showFollowingUsersModal, setShowFollowingUserModal] = useState(false);
+  const [showFollowersUsersModal, setShowFollowersUserModal] = useState(false);
 
   return (
     <div className="flex p-4 gap-5">
@@ -58,13 +60,19 @@ export const ProfileSection = ({ profile }) => {
           </a>
         </div>
         <div className="flex gap-4">
-          <div className="flex gap-1">
+          <div
+            className="flex gap-1 hover:cursor-pointer"
+            onClick={() => setShowFollowingUserModal(true)}
+          >
             <p className="text-sm font-bold sm:text-md">{following.length}</p>
             <p className="text-sm font-light dark:text-gray-400 sm:text-md">
               Following
             </p>
           </div>
-          <div className="flex gap-1">
+          <div
+            className="flex gap-1 hover:cursor-pointer"
+            onClick={() => setShowFollowersUserModal(true)}
+          >
             <p className="text-sm font-bold sm:text-md">{followers.length}</p>
             <p className="text-sm font-light dark:text-gray-400 sm:text-md">
               Followers
@@ -82,9 +90,25 @@ export const ProfileSection = ({ profile }) => {
         Edit Profile
       </button>
 
-      {editProfileModal && <EditProfileModal setIsEditProfileModal={setIsEditProfileModal}  
-      {...profile}
-      />}
+      {editProfileModal && (
+        <EditProfileModal
+          setIsEditProfileModal={setIsEditProfileModal}
+          {...profile}
+        />
+      )}
+
+      {showFollowingUsersModal && (
+        <FollowingUserModal
+          setShowFollowingUserModal={setShowFollowingUserModal}
+          following={following}
+        />
+      )}
+      {showFollowersUsersModal && (
+        <FollowersUserModal
+          setShowFollowersUserModal={setShowFollowersUserModal}
+          followers={followers}
+        />
+      )}
     </div>
   );
 };
