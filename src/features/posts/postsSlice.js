@@ -5,12 +5,18 @@ import {
   dislikePostService,
   createPostService,
   addPostCommentService,
+  editPostService,
+  deletePostService,
+  deletePostCommentService,
+  editPostCommentService,
 } from '../../services';
+import { toast } from 'react-toastify';
 
 const postsInitialState = {
   data: [],
   loading: false,
   error: '',
+  activeSort: 'Latest',
 };
 
 const getAllPosts = createAsyncThunk(
@@ -77,9 +83,65 @@ const addPostComment = createAsyncThunk(
   }
 );
 
+const editPost=createAsyncThunk(
+  'posts/editPost',
+  async({postId,postData,token},{rejectWithValue})=>{ 
+    try{
+      const { data } = await editPostService(postId, postData, token);
+      toast.success('Post is updated successfully.')
+      return data;
+    }catch(error){
+      return rejectWithValue(error.response.data.errors[0]);
+    }
+  }
+);
+
+const deletePost = createAsyncThunk(
+  'posts/deletePost',
+  async ({ postId, token }, { rejectWithValue }) => {
+    try {
+      const { data } = await deletePostService(postId, token);
+      toast.success("Post deleted.");
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.errors[0]);
+    }
+  }
+);
+
+const deletePostComment=createAsyncThunk('posts/deletePostComment',async({postId,commentId,token},{rejectWithValue})=>{
+try {
+  const { data } = await deletePostCommentService(postId, commentId, token);
+  toast.success('Comment deleted.');
+  return data;
+} catch (error) {
+  return rejectWithValue(error.response.data.errors[0]);
+}
+})
+
+const editPostComment = createAsyncThunk(
+  'posts/editPostComment',
+  async ({ postId, commentId, token, commentData },{rejectWithValue}) => {
+    try {
+      const { data } = await editPostCommentService(postId, commentId, token,commentData);
+      toast.success('Comment edited.');
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.errors[0]);
+    }
+  }
+);
+
+
+
 const postsSlice = createSlice({
   name: 'posts',
   initialState: postsInitialState,
+  reducers: {
+    setActiveSort: (state, { payload }) => {
+      state.activeSort = payload;
+    },
+  },
   extraReducers: {
     [getAllPosts.pending]: state => {
       state.loading = true;
@@ -103,16 +165,30 @@ const postsSlice = createSlice({
     [createPost.rejected]: (state, action) => {
       state.error = action.payload;
     },
+    [editPost.fulfilled]: (state, action) => {
+      state.data = action.payload.posts;
+    },
+    [deletePost.fulfilled]: (state, action) => {
+      state.data = action.payload.posts;
+    },
     [addPostComment.fulfilled]: (state, action) => {
       state.data = action.payload.posts;
     },
     [addPostComment.rejected]: (state, action) => {
       state.error = action.payload;
     },
+    [deletePostComment.fulfilled]: (state, action) => {
+      state.data = action.payload.posts;
+    },
+    [editPostComment.fulfilled]: (state, action) => {
+      state.data = action.payload.posts;
+    },
   },
 });
 
 const postsReducer = postsSlice.reducer;
+
+export const { setActiveSort } = postsSlice.actions;
 
 export {
   likePost,
@@ -121,4 +197,8 @@ export {
   postsReducer,
   createPost,
   addPostComment,
+  deletePostComment,
+  editPostComment,
+  editPost,
+  deletePost,
 };

@@ -12,7 +12,7 @@ const getUserPost = createAsyncThunk(
   async (postId, { rejectWithValue }) => {
     try {
       const { data } = await getUserPostService(postId);
-     
+
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.errors[0]);

@@ -24,7 +24,7 @@ export const Login = () => {
   return (
     <>
       <div className="h-[30rem] mt-4">
-        <div className="m-auto p-4 w-fit rounded-lg border border-gray-200 sm:p-6 sm:w-96 lg:p-8 dark:bg-slate-800 dark:border-gray-700">
+        <div className="m-auto p-4 w-fit rounded-lg border border-gray-200 bg-gray-200/40 sm:p-6 sm:w-96 lg:p-8 dark:bg-slate-800 dark:border-gray-700">
           <form
             className="space-y-6"
             onSubmit={e => {
@@ -52,7 +52,7 @@ export const Login = () => {
                 required
               />
             </div>
-           
+
             <div>
               <label
                 htmlFor="password"
@@ -80,7 +80,7 @@ export const Login = () => {
             </button>
             <button
               type="submit"
-              className="w-full text-orange-600 hover:text-white border border-orange-600 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-orange-500 dark:text-white dark:hover:text-white dark:hover:bg-orange-700"
+              className="w-full text-orange-600 hover:text-white dark:hover:text-white border border-orange-600 focus:outline-none  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-orange-500 dark:text-white dark:hover:text-white dark:hover:bg-orange-700 hover:bg-orange-700"
               onClick={() => {
                 setLogin({
                   ...login,

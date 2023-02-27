@@ -11,7 +11,7 @@ const addPostCommentService=async(postId,commentData,token)=>{
             authorization:token,
         }
     });
-    console.log("your comment data:",response);
+    
     return response;
 }
 

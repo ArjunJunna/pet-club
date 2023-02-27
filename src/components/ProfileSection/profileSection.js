@@ -1,19 +1,27 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { logoutHandler } from '../../features';
+import { EditProfileModal } from './editProfileModal';
+import { getUser } from '../../features';
+import { FollowersUserModal } from './followersUserModal';
+import { FollowingUserModal } from './followingUserModal';
 
 export const ProfileSection = ({ profile }) => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch]);
   const {
     fullName,
     profileAvatar,
     username,
     bio,
     website,
-    followers,
-    following,
+    followers = [],
+    following = [],
   } = profile;
+  const [editProfileModal, setIsEditProfileModal] = useState(false);
+  const [showFollowingUsersModal, setShowFollowingUserModal] = useState(false);
+  const [showFollowersUsersModal, setShowFollowersUserModal] = useState(false);
 
   return (
     <div className="flex p-4 gap-5">
@@ -22,7 +30,7 @@ export const ProfileSection = ({ profile }) => {
         src={profileAvatar}
         alt="User Avatar"
       />
-      <div className="flex flex-col grow gap-1 font-medium dark:text-white">
+      <div className="flex flex-col grow gap-1 font-medium text-gray-900 dark:text-white">
         <div className="name-credentials">
           <p className="font-bold text-lg md:text-2xl lg:text-3xl ">
             {fullName}
@@ -52,30 +60,55 @@ export const ProfileSection = ({ profile }) => {
           </a>
         </div>
         <div className="flex gap-4">
-          <div className="flex gap-1">
-            <p className="text-sm font-bold sm:text-md">2</p>
+          <div
+            className="flex gap-1 hover:cursor-pointer"
+            onClick={() => setShowFollowingUserModal(true)}
+          >
+            <p className="text-sm font-bold sm:text-md">{following.length}</p>
             <p className="text-sm font-light dark:text-gray-400 sm:text-md">
               Following
             </p>
           </div>
-          <div className="flex gap-1">
-            <p className="text-sm font-bold sm:text-md">4</p>
+          <div
+            className="flex gap-1 hover:cursor-pointer"
+            onClick={() => setShowFollowersUserModal(true)}
+          >
+            <p className="text-sm font-bold sm:text-md">{followers.length}</p>
             <p className="text-sm font-light dark:text-gray-400 sm:text-md">
               Followers
             </p>
           </div>
         </div>
       </div>
-      <Link to="/login" className="ml-auto">
-        <button
-          title="Logout"
-          onClick={() => {
-            dispatch(logoutHandler());
-          }}
-        >
-          <i className="bi bi-box-arrow-right"></i>
-        </button>
-      </Link>
+
+      <button
+        className="rounded-3xl bg-slate-600 font-semibold  ml-auto h-8 w-24 hover:bg-slate-800"
+        onClick={() => {
+          setIsEditProfileModal(true);
+        }}
+      >
+        Edit Profile
+      </button>
+
+      {editProfileModal && (
+        <EditProfileModal
+          setIsEditProfileModal={setIsEditProfileModal}
+          {...profile}
+        />
+      )}
+
+      {showFollowingUsersModal && (
+        <FollowingUserModal
+          setShowFollowingUserModal={setShowFollowingUserModal}
+          following={following}
+        />
+      )}
+      {showFollowersUsersModal && (
+        <FollowersUserModal
+          setShowFollowersUserModal={setShowFollowersUserModal}
+          followers={followers}
+        />
+      )}
     </div>
   );
 };

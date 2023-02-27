@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { getAllUserPosts, getUser } from '../../features';
 
 export const Profile = () => {
+  const { data: users } = useSelector(state => state.users);
   const dispatch = useDispatch();
   const { username } = useParams();
   const {
@@ -26,7 +27,7 @@ export const Profile = () => {
   }, [dispatch, username]);
   return (
     <>
-      <div className="flex justify-evenly text-white dark:bg-slate-900 h-screen">
+      <div className="flex justify-evenly text-white dark:bg-slate-900">
         <SideBar />
         <div className="flex flex-col grow max-w-xl z-10">
           {profile === null ? (

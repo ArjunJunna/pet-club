@@ -68,6 +68,8 @@ export const CommentSection = ({ postId, comments }) => {
               key={commentMsg._id}
               postId={postId}
               commentMsg={commentMsg}
+              token={token}
+              commentId={commentMsg._id}
             />
           ))}
         </div>

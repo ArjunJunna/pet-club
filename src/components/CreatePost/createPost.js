@@ -24,7 +24,7 @@ export const CreatePost = () => {
   };
 
   return (
-    <div className="grid grid-cols-[2rem_1fr] gap-2 items-start px-4 py-4 cursor-text bg-slate-800 rounded-[0.3rem]">
+    <div className="grid grid-cols-[2rem_1fr] gap-2 items-start px-4 py-4 cursor-text bg-white  dark:bg-slate-800 rounded-[0.3rem]">
       <span className="cursor-pointer flex gap-3">
         <img
           src={profileAvatar}
@@ -37,7 +37,7 @@ export const CreatePost = () => {
         />
 
         <div className="flex flex-col -mt-0.5">
-          <span className="text-sm font-semibold">{fullName}</span>
+          <span className="text-sm font-semibold text-gray-900 dark:text-white">{fullName}</span>
           <p className="text-sm text-gray-400">@{username}</p>
         </div>
       </span>
@@ -49,7 +49,7 @@ export const CreatePost = () => {
         }}
       >
         <textarea
-          className="w-full break-all outline-none text-base mt-10 mb-1.5 placeholder:text-gray-400 bg-slate-800 border border-slate-800"
+          className="w-full break-all outline-none text-base mt-10 mb-1.5 placeholder:text-gray-400 bg-white dark:bg-slate-800 border dark:border-slate-800 border-white text-black dark:text-white"
           placeholder="What's happening?"
           value={postData.content}
           onChange={e => {
@@ -59,7 +59,7 @@ export const CreatePost = () => {
         <div className="ml-auto flex items-center gap-4">
           <label className="cursor-pointer text-lg">
             <input type="file" accept="image/*" className="hidden" />
-            <i className="bi bi-card-image"></i>
+            <i className="bi bi-card-image dark:text-white text-gray-900"></i>
           </label>
           <button
             type="submit"
