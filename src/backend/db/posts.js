@@ -22,7 +22,22 @@ export const posts = [
     fullName: 'Tom Cruise',
     createdAt: new Date('June 21, 2022'),
     updatedAt: new Date('june 21, 2022'),
-    comments: [],
+    comments: [
+      {
+        _id: uuid(),
+        comment: 'This is amazing...',
+        username: 'keanu_reeves',
+        fullName: 'Keanu Reeves',
+        profileAvatar:
+          'https://res.cloudinary.com/djxonmiuo/image/upload/v1672933292/pet-club-images/keanu_lhlmyz.jpg',
+        createdAt: new Date('June 21, 2022'),
+        updatedAt: new Date('June 21, 2022'),
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+    ],
   },
   {
     _id: uuid(),
@@ -86,7 +101,22 @@ export const posts = [
     fullName: 'Enthan Hoover',
     createdAt: new Date('June 14, 2022'),
     updatedAt: new Date('June 14, 2022'),
-    comments: [],
+    comments: [
+      {
+        _id: uuid(),
+        comment: 'So damn true...',
+        username: 'keanu_reeves',
+        fullName: 'Keanu Reeves',
+        profileAvatar:
+          'https://res.cloudinary.com/djxonmiuo/image/upload/v1672933292/pet-club-images/keanu_lhlmyz.jpg',
+        createdAt: new Date('June 14, 2022'),
+        updatedAt: new Date('June 14, 2022'),
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+    ],
   },
   {
     _id: uuid(),

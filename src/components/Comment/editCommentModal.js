@@ -1,20 +1,13 @@
-import { useNavigate } from 'react-router-dom';
-
-const EditPostModal = ({
-  setEditPostModal,
-  fullName,
-  username,
-  profileAvatar,
-  content,
-  postData,
-  setPostData,
-  editPostHandler,
+export const EditCommentModal = ({
+  setEditCommentModal,
+  editCommentHandler,
+  commentData,
+  setCommentData,
+  comment,
 }) => {
-  const navigate = useNavigate();
-
   return (
     <div
-      onClick={() => setEditPostModal(false)}
+      onClick={() => setEditCommentModal(false)}
       className="fixed inset-0 z-10 flex items-center justify-center bg-gray-800/[0.7]"
     >
       <div
@@ -23,42 +16,26 @@ const EditPostModal = ({
       >
         <div className="flex items-center p-2">
           <p className="text-xl font-bold font-medium text-white">
-            <i className="bi bi-pen mr-2"></i>Edit Post
+            <i className="bi bi-pen mr-2"></i>Edit Comment
           </p>
           <button
             className="h-6 w-6 ml-auto rounded-full text-gray-400hover:bg-gray-600"
-            onClick={() => setEditPostModal(false)}
+            onClick={() => setEditCommentModal(false)}
           >
             <i className="bi bi-x-lg"></i>
           </button>
         </div>
-        <div className="flex gap-2 px-1">
-          <img
-            className="w-11 h-11 rounded-full self-startbg-gray-700 hover:cursor-pointer"
-            src={
-              profileAvatar
-            }
-            alt="User Avatar"
-            onClick={() => {
-              navigate(`/profile/${username}`);
-            }}
-          />
-          <div className="flex gap-4">
-            <div className="name-credentials">
-              <p className="font-semibold text-white">{fullName}</p>
-              <p className="text-sm text-gray-400">@{username}</p>
-            </div>
-          </div>
-        </div>
+
         <div className="rounded border py-2 px-2 border-gray-700 bg-gray-900">
           <textarea
             id="editor"
             rows="5"
             className="block h-24 px-0 w-full text-base  border-0 outline-none  bg-gray-900  text-white "
-            placeholder="What's happening?"
-            defaultValue={content}
+            placeholder="Edit your comment here..."
+            defaultValue={comment}
             onChange={e => {
-              setPostData({ ...postData, content: e.target.value });
+              e.stopPropagation();
+              setCommentData({ ...commentData, comment: e.target.value });
             }}
             required
           ></textarea>
@@ -67,7 +44,7 @@ const EditPostModal = ({
           <button
             type="button"
             className="focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-white  dark:hover:bg-orange-800"
-            onClick={() => setEditPostModal(false)}
+            onClick={() => setEditCommentModal(false)}
           >
             Cancel
           </button>
@@ -75,9 +52,8 @@ const EditPostModal = ({
             type="button"
             className="bg-orange-600 rounded-lg py-1 px-5 font-medium hover:bg-orange-800"
             onClick={() => {
-              editPostHandler();
-              setEditPostModal(false);
-              navigate('/');
+              editCommentHandler();
+              setEditCommentModal(false);
             }}
           >
             Save
@@ -87,5 +63,3 @@ const EditPostModal = ({
     </div>
   );
 };
-
-export { EditPostModal };

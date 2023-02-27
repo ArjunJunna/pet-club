@@ -9,6 +9,7 @@ export {PostSection} from "./PostsSection/postsSection";
 export {CreatePost} from "./CreatePost/createPost";
 export {ResetScroll} from "./ResetScroll/resetScroll";
 export {Comment} from "./Comment/comment";
+export {EditCommentModal} from './Comment/editCommentModal';
 export { CommentSection } from './CommentSection/commentSection';
 export {ProfileSection} from './ProfileSection/profileSection';
 export {SortBar} from './SortBar/sortBar';
