@@ -42,7 +42,7 @@ export const Comment = ({ postId, commentMsg, commentId }) => {
 
         <div className="flex flex-col gap-y-2 bg-white dark:bg-gray-800">
           <div className="name-credentials">
-            <p className="font-semibold dark:text-white">{fullName}</p>
+            <p className="font-semibold text-gray-900 dark:text-white">{fullName}</p>
             <p className="text-sm text-gray-500 dark:text-gray-400">
               @{username}
             </p>
@@ -63,18 +63,18 @@ export const Comment = ({ postId, commentMsg, commentId }) => {
         )}
         {showCommentOptions ? (
           <div
-            className="absolute top-10 right-6 text-sm flex flex-col gap-1.5 items-start bg-slate-800 rounded shadow-slate-900 shadow-xl  z-10 text-slate-100  text-center border border-slate-500"
+            className="absolute top-10 right-6 text-sm flex flex-col gap-1.5   text-center border shadow-xl  z-10 items-start rounded shadow-slate-300 dark:shadow-slate-900 dark:bg-slate-800  dark:text-slate-100 border-gray-300 dark:border-slate-500 text-slate-900 bg-white"
             ref={ref}
           >
             <button
-              className="cursor-pointer hover:bg-slate-700 py-2 w-32 rounded"
+              className="cursor-pointer hover:bg-gray-300 dark:hover:bg-slate-700 py-2 w-32 rounded"
               onClick={() => setEditCommentModal(true)}
             >
               Edit Comment
             </button>
 
             <button
-              className="cursor-pointer hover:bg-slate-700 py-2 w-32 rounded"
+              className="cursor-pointer hover:bg-gray-300 dark:hover:bg-slate-700 py-2 w-32 rounded"
               onClick={e => {
                 e.stopPropagation();
                 deleteCommentHandler();

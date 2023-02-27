@@ -42,7 +42,7 @@ export const SuggestedUserCard = ({
         />
       </span>
       <div className="flex flex-col grow -mt-0.5">
-        <span className="text-sm font-semibold">{fullName}</span>
+        <span className="text-sm font-semibold text-gray-600 dark:text-white">{fullName}</span>
         <span className="text-sm text-gray-500">@{username}</span>
       </div>
       {follow ? (

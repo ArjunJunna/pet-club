@@ -18,17 +18,17 @@ export const SortBar = () => {
   
   return (
     <div className="text-base p-2 font-medium flex justify-between relative">
-      <div className="inline">Sort By</div>
+      <div className="inline text-gray-900 dark:text-white">Sort By</div>
       <button onClick={() => setShowSortModal(prev => !prev)}>
-        <i className="bi bi-sliders"></i>
+        <i className="bi bi-sliders text-gray-900 dark:text-white"></i>
       </button>
       {showSortModal ? (
         <div
-          className="absolute top-8 right-4 w-max text-sm flex flex-col gap-1.5 items-start py-2 px-3 bg-slate-800 rounded shadow-slate-900 shadow-xl  z-10"
+          className="absolute top-8 right-4 w-max text-sm flex flex-col gap-1.5 items-start py-2 px-3 bg-white dark:bg-slate-800 rounded shadow-slate-300 dark:shadow-slate-900 dark:text-slate-100 border border-gray-300 dark:border-slate-800  text-black dark:shadow-slate-900 shadow-xl  z-10"
           ref={ref}
         >
           {pathname === '/explore' ? (
-            <button
+            <button 
               style={{ color: activeSort === 'Trending' ? '#e34b05' : '' }}
               onClick={() => {
                 setShowSortModal(false);

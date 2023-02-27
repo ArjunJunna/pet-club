@@ -21,10 +21,10 @@ export const Home = () => {
   const sortedPosts = sortByDate(feedPosts, activeSort);
   return (
     <>
-      <div className="flex justify-evenly text-white dark:bg-slate-900">
+      <div className="flex justify-evenly text-gray-100 dark:text-white dark:bg-slate-900">
         <SideBar />
         <div className="flex flex-col grow max-w-xl z-10">
-          <h2 className="text-base p-2 font-medium">Home</h2>
+          <h2 className="text-base p-2 font-medium text-gray-900 dark:text-white">Home</h2>
           <CreatePost />
           <SortBar/>
           <PostSection posts={sortedPosts} />

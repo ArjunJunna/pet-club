@@ -17,7 +17,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="dark:bg-slate-900">
+    <div className="dark:bg-slate-900 bg-slate-100">
       <Header />
       <AppRoutes />
       <ToastContainer

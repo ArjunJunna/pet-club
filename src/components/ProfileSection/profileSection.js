@@ -30,7 +30,7 @@ export const ProfileSection = ({ profile }) => {
         src={profileAvatar}
         alt="User Avatar"
       />
-      <div className="flex flex-col grow gap-1 font-medium dark:text-white">
+      <div className="flex flex-col grow gap-1 font-medium text-gray-900 dark:text-white">
         <div className="name-credentials">
           <p className="font-bold text-lg md:text-2xl lg:text-3xl ">
             {fullName}

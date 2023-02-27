@@ -1,4 +1,4 @@
-import { useState,useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
@@ -76,7 +76,7 @@ export const Post = ({ post }) => {
 
   return (
     <div className="flex flex-col gap-3 hover:cursor-pointer relative">
-      <div className="flex gap-3 rounded bg-slate-800 p-3">
+      <div className="flex gap-3 rounded bg-white dark:bg-slate-800 p-3">
         <img
           src={profileAvatar}
           alt="profile avatar"
@@ -90,7 +90,9 @@ export const Post = ({ post }) => {
           <div className="flex justify-between">
             <div className="flex gap-4">
               <div className="name-credentials">
-                <p className="font-semibold">{fullName}</p>
+                <p className="font-semibold text-gray-900 dark:text-white">
+                  {fullName}
+                </p>
                 <p className="text-sm text-gray-400">@{username}</p>
               </div>
               <Moment
@@ -111,18 +113,18 @@ export const Post = ({ post }) => {
 
             {showPostOptions ? (
               <div
-                className="absolute top-10 right-6 text-sm flex flex-col gap-1.5 items-start bg-slate-800 rounded shadow-slate-900 shadow-xl  z-10 text-slate-100  text-center border border-slate-500"
+                className="absolute top-10 right-6 text-sm flex flex-col gap-1.5 text-center border shadow-xl  items-start z-10 rounded  shadow-slate-300 dark:shadow-slate-900 dark:bg-slate-800  dark:text-slate-100 border-gray-300 dark:border-slate-500 text-slate-900 bg-white "
                 ref={ref}
               >
                 <button
-                  className="cursor-pointer hover:bg-slate-700 py-2 w-28 rounded"
+                  className="cursor-pointer hover:bg-gray-300 dark:hover:bg-slate-700 py-2 w-28 rounded"
                   onClick={() => setEditPostModal(true)}
                 >
                   Edit Post
                 </button>
 
                 <button
-                  className="cursor-pointer hover:bg-slate-700 py-2 w-28 rounded"
+                  className="cursor-pointer hover:bg-gray-300 dark:hover:bg-slate-700 py-2 w-28 rounded"
                   onClick={() => deletePostHandler()}
                 >
                   Delete Post
@@ -130,15 +132,18 @@ export const Post = ({ post }) => {
               </div>
             ) : null}
           </div>
-          <p className="text-sm" onClick={() => navigate(`/post/${_id}`)}>
+          <p
+            className="text-sm text-gray-900 dark:text-white"
+            onClick={() => navigate(`/post/${_id}`)}
+          >
             {content}
           </p>
-          <div className="flex justify-between pt-1 text-gray-400">
+          <div className="flex justify-between pt-1 text-gray-500 dark:text-gray-400">
             <button
               className={`flex gap-1 ${
                 likedBy.find(({ username }) => username === user.username)
                   ? 'text-green-500 hover:text-green-500 dark:text-green-500 dark:hover:text-green-500'
-                  : 'text-black hover:text-green-500 dark:text-gray-400 dark:hover:text-green-500'
+                  : ' hover:text-green-500 text-gray-500 dark:text-gray-400 dark:hover:text-green-500'
               }`}
               onClick={likeHandler}
             >
@@ -154,7 +159,7 @@ export const Post = ({ post }) => {
               className={`flex gap-1 ${
                 dislikedBy.find(({ username }) => username === user.username)
                   ? 'text-red-400 hover:text-red-400 dark:text-red-400 dark:hover:text-red-400'
-                  : 'text-black hover:text-red-400 dark:text-gray-400 dark:hover:text-red-400'
+                  : ' hover:text-red-400 text-gray-500 dark:text-gray-400 dark:hover:text-red-400'
               }`}
               onClick={dislikeHandler}
             >
