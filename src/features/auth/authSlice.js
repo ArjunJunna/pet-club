@@ -46,8 +46,8 @@ export const signUpHandler = createAsyncThunk(
 );
 
 const initialState = {
-  token: localStorage.getItem('token') || null,
-  user: JSON.parse(localStorage.getItem('user')),
+  token:null,
+  user: null,
   isLoading: false,
 };
 
@@ -57,6 +57,7 @@ export const authSlice = createSlice({
   reducers: {
     logoutHandler: state => {
       state.token = null;
+      state.user = null;
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       toast.success('You are logged out...');
@@ -71,6 +72,7 @@ export const authSlice = createSlice({
     [loginHandler.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       state.token = payload.encodedToken;
+      state.user = JSON.parse(localStorage.getItem('user'));
     },
     [loginHandler.rejected]: (state, { payload }) => {
       state.isLoading = payload;
@@ -78,16 +80,13 @@ export const authSlice = createSlice({
     // signup
     [signUpHandler.pending]: state => {
       state.isLoading = true;
-     
     },
     [signUpHandler.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       state.token = payload.encodedToken;
-      
     },
     [signUpHandler.rejected]: (state, { payload }) => {
       state.loading = payload;
-    
     },
   },
 });

@@ -50,7 +50,6 @@ const dislikePost = createAsyncThunk(
   async ({ postId, token }, { rejectWithValue }) => {
     try {
       const { data } = await dislikePostService(postId, token);
-      console.log('dislike:', data);
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.error[0]);

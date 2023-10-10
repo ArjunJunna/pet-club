@@ -9,9 +9,11 @@ export const SuggestedUsers = () => {
   const suggestedUsers = getSuggestedUsers(users, username, following);
   return (
     <>
-      <div className="w-72 sticky top-20 h-full">
+      <div className="w-72 sticky top-20 h-full md:mx-2 max-md:hidden">
         <div className="flex flex-col h-auto bg-white dark:bg-slate-800 rounded p-3 tracking-wide gap-2">
-          <h1 className="font-bold text-gray-900 dark:text-white">Who to Follow</h1>
+          <h1 className="font-bold text-gray-900 dark:text-white">
+            Who to Follow
+          </h1>
           {suggestedUsers.slice(0, 5).map(user => (
             <SuggestedUserCard key={user._id} {...user} />
           ))}

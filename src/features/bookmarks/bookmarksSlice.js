@@ -16,7 +16,6 @@ const getBookmarkedPosts = createAsyncThunk(
   async (token, { rejectWithValue }) => {
     try {
       const { data } = await getBookmarkedPostsService(token);
-      console.log('Your bookmarked posts: ', data);
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.errors[0]);

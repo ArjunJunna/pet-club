@@ -65,7 +65,7 @@ const createPostService = async (postData, token) => {
       { postData },
       { headers: { authorization: token } }
     );
-    console.log("from post service:",response);
+
     return response;
   } catch (error) {
     console.log(error.message);

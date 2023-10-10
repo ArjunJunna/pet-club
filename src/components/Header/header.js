@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useRef, useEffect } from 'react';
 import { logoutHandler } from '../../features';
@@ -6,14 +6,21 @@ import useOnClickOutside from '../../utilities/js/useOnClickOutside';
 
 export const Header = () => {
   const { user, token } = useSelector(state => state.auth);
+  const { pathname } = useLocation();
   const { username } = user ?? {};
   const dispatch = useDispatch();
   const [showUserModal, setShowUserModal] = useState(false);
   const [theme, setTheme] = useState(null);
+  const [menu, showMenu] = useState(false);
   const ref = useRef();
+  const menuRef = useRef();
   const handlerRef = () => {
     setShowUserModal(false);
   };
+  const menuHandler = () => {
+    showMenu(prev => !prev);
+  };
+  useOnClickOutside(menuRef, menuHandler);
   useOnClickOutside(ref, handlerRef);
   useEffect(() => {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -36,10 +43,83 @@ export const Header = () => {
 
   return (
     <>
-      <nav className="sticky top-0 z-20 w-full flex justify-around items-center py-3 border-b-[0.1px] dark:border-gray-700 border-gray-200 bg-white dark:bg-slate-900">
+      <nav className="sticky top-0 z-20 w-full flex justify-around items-center py-3 border-b-[0.1px] dark:border-gray-700 border-gray-200 bg-white dark:bg-slate-900 ">
+        {pathname !== '/login' &&
+          pathname !== '/signup' && (
+            <i
+              className="bi bi-list pl-4 text-xl md:hidden text-slate-900 dark:text-white"
+              onClick={() => {
+                showMenu(prev => !prev);
+              }}
+            ></i>
+          )}
+
+        {menu && (
+          <>
+            <div
+              className="bg-gray-100 dark:bg-slate-800 h-[20rem] w-[16rem] z-30 absolute top-0 left-0 flex flex-col rounded-br-md "
+              ref={menuRef}
+            >
+              <div className="flex p-3">
+                <Link to="/home" className="mr-auto cursor-pointer">
+                  <img
+                    src="../assets/images/petclub.png"
+                    alt="logo"
+                    className="h-7"
+                  />
+                </Link>
+                <i
+                  class="bi bi-x-lg text-slate-900 dark:text-white text-xl"
+                  onClick={() => {
+                    showMenu(prev => !prev);
+                  }}
+                ></i>
+              </div>
+              <ul className="mt-4 space-y-5 flex flex-col items-center justify-center ">
+                <li className="">
+                  <Link
+                    className="flex p-2 text-lg rounded-lg text-gray-900 dark:text-white  dark:hover:bg-gray-800 hover:bg-gray-200 font-semibold"
+                    to="/home"
+                    onClick={() => showMenu(prev => !prev)}
+                  >
+                    <i className="bi bi-house-door-fill mr-3"></i>Home
+                  </Link>
+                </li>
+                <li className="ml-10">
+                  <Link
+                    className="flex p-2 text-lg rounded-lg text-gray-800 dark:text-white  dark:hover:bg-gray-800 hover:bg-gray-200 font-semibold"
+                    to="/bookmarks"
+                    onClick={() => showMenu(prev => !prev)}
+                  >
+                    <i className="bi bi-bookmark-fill mr-3"></i>Bookmarks
+                  </Link>
+                </li>
+                <li className="ml-2">
+                  <Link
+                    className="flex-none p-2 text-lg rounded-lg text-gray-800 dark:text-white  dark:hover:bg-gray-800 hover:bg-gray-200 font-semibold"
+                    to="/explore"
+                    onClick={() => showMenu(prev => !prev)}
+                  >
+                    <i className="bi bi-compass-fill mr-3"></i>Explore
+                  </Link>
+                </li>
+                <li className="flex items-center">
+                  <Link
+                    className="flex-none p-2 text-lg rounded-lg text-gray-800 dark:text-white  dark:hover:bg-gray-800 hover:bg-gray-200 font-semibold"
+                    to={`/profile/${username}`}
+                    onClick={() => showMenu(prev => !prev)}
+                  >
+                    <i className="bi bi-person-fill mr-3"></i>Profile
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </>
+        )}
         <Link to="/home" className="mr-auto pl-4 cursor-pointer">
           <img src="../assets/images/petclub.png" alt="logo" className="h-7" />
         </Link>
+        {/* 
         <div className="bg-gray-100 dark:bg-slate-800 rounded-full h-9 w-[25rem] border dark:border-gray-600 border-gray-200 focus-within:border-orange-700">
           <input
             type="text"
@@ -48,7 +128,7 @@ export const Header = () => {
           />
           <i className="bi bi-search ml-2.5 cursor-pointer text-orange-600"></i>
         </div>
-
+          */}
         {token ? (
           <>
             <button
@@ -70,7 +150,10 @@ export const Header = () => {
                 ref={ref}
               >
                 <Link to={`/profile/${username}`}>
-                  <div className="cursor-pointer hover:bg-gray-300 dark:hover:bg-slate-700 py-2 px-4 w-36 rounded">
+                  <div
+                    className="cursor-pointer hover:bg-gray-300 dark:hover:bg-slate-700 py-2 px-4 w-36 rounded"
+                    onClick={() => setShowUserModal(prev => !prev)}
+                  >
                     Profile
                   </div>
                 </Link>
@@ -78,6 +161,7 @@ export const Header = () => {
                   className="cursor-pointer hover:bg-gray-300 dark:hover:bg-slate-700 py-2 px-4 w-36 rounded"
                   onClick={() => {
                     handleThemeSwitch();
+                    setShowUserModal(prev => !prev);
                   }}
                 >
                   {theme === 'light' ? (
@@ -97,6 +181,7 @@ export const Header = () => {
                   className="cursor-pointer hover:bg-gray-300 dark:hover:bg-slate-700 py-2 px-4 w-36 rounded"
                   onClick={() => {
                     dispatch(logoutHandler());
+                    setShowUserModal(prev => !prev);
                   }}
                 >
                   Logout

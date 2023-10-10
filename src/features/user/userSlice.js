@@ -22,7 +22,6 @@ const getUser = createAsyncThunk(
   async (username, { rejectWithValue }) => {
     try {
       const { data } = await getUserService(username);
-      console.log('from get user:', data);
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.errors[0]);
@@ -35,7 +34,6 @@ const getAllUserPosts = createAsyncThunk(
   async (username, { rejectWithValue }) => {
     try {
       const { data } = await getAllUserPostsService(username);
-      console.log('from get all user posts:', data);
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data.error[0]);
@@ -65,7 +63,6 @@ const userSlice = createSlice({
     },
     [getUser.fulfilled]: (state, action) => {
       state.profile.loading = false;
-      console.log('from get all users:', action.payload);
       state.profile.data = action.payload.user;
     },
     [getUser.rejected]: state => {
@@ -76,7 +73,6 @@ const userSlice = createSlice({
     },
     [getAllUserPosts.fulfilled]: (state, action) => {
       state.posts.loading = false;
-      console.log('from getall user posts:', action.payload);
       state.posts.data = action.payload.posts;
     },
     [getAllUserPosts.rejected]: state => {

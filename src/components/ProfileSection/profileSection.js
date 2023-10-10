@@ -7,9 +7,7 @@ import { FollowingUserModal } from './followingUserModal';
 
 export const ProfileSection = ({ profile }) => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getUser());
-  }, [dispatch]);
+
   const {
     fullName,
     profileAvatar,
@@ -19,14 +17,17 @@ export const ProfileSection = ({ profile }) => {
     followers = [],
     following = [],
   } = profile;
+  useEffect(() => {
+    dispatch(getUser(username));
+  }, [dispatch, username]);
   const [editProfileModal, setIsEditProfileModal] = useState(false);
   const [showFollowingUsersModal, setShowFollowingUserModal] = useState(false);
   const [showFollowersUsersModal, setShowFollowersUserModal] = useState(false);
 
   return (
-    <div className="flex p-4 gap-5">
+    <div className="flex p-4 gap-5 max-sm:gap-3">
       <img
-        className="w-28 h-28 rounded-full sm:w-24 sm:h-24"
+        className="w-28 h-28 rounded-full max-sm:w-20 max-sm:h-20 sm:w-24 sm:h-24"
         src={profileAvatar}
         alt="User Avatar"
       />
@@ -82,12 +83,12 @@ export const ProfileSection = ({ profile }) => {
       </div>
 
       <button
-        className="rounded-3xl bg-slate-600 font-semibold  ml-auto h-8 w-24 hover:bg-slate-800"
+        className="rounded-3xl text-slate-900 dark:text-white bg-slate-300 hover:bg-slate-200 dark:bg-slate-600  ml-auto h-8 max-sm:w-12 w-16 max-sm:text-xs dark:hover:bg-slate-800 flex-shrink-0"
         onClick={() => {
           setIsEditProfileModal(true);
         }}
       >
-        Edit Profile
+        Edit
       </button>
 
       {editProfileModal && (

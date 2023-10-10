@@ -10,7 +10,7 @@ const getBookmarkedPostsService = async token => {
       },
     }
   );
-  console.log(response);
+
   return response;
 };
 
@@ -24,7 +24,7 @@ const addPostToBookmarksService = async (postId, token) => {
       },
     }
   );
-  console.log(response);
+
   return response;
 };
 
@@ -34,7 +34,7 @@ const removePostFromBookmarksService = async (postId, token) => {
     {},
     { headers: { authorization: token } }
   );
-  console.log(response);
+
   return response;
 };
 

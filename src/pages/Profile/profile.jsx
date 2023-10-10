@@ -27,7 +27,7 @@ export const Profile = () => {
   }, [dispatch, username]);
   return (
     <>
-      <div className="flex justify-evenly text-white dark:bg-slate-900">
+      <div className="flex justify-evenly min-h-screen text-white dark:bg-slate-900">
         <SideBar />
         <div className="flex flex-col grow max-w-xl z-10">
           {profile === null ? (

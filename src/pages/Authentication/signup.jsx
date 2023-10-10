@@ -29,14 +29,13 @@ export const SignUp = () => {
 
   return (
     <>
-      <div className="h-[30rem] mt-4">
+      <div className="h-[30rem] mt-12 min-h-screen">
         <div className="m-auto p-4 w-fit rounded-lg border border-gray-200 sm:p-6 sm:w-96 lg:p-8 bg-gray-200/40 dark:bg-slate-800 dark:border-gray-700">
           <form
             className="space-y-2"
             onSubmit={() => {
               dispatch(signUpHandler({ signup, setSignup }));
-              console.log('clicked submit');
-              console.log(signup.input);
+      
             }}
           >
             <h5 className="text-xl font-medium text-center text-gray-900 dark:text-white">

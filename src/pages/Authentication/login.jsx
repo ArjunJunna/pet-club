@@ -9,7 +9,7 @@ export const Login = () => {
 
   const [login, setLogin] = useState({
     input: {},
-    error:"",
+    error: '',
   });
 
   const loginInputHandler = e => {
@@ -17,13 +17,13 @@ export const Login = () => {
     setLogin({ ...login, input: { ...login.input, [name]: value } });
   };
 
-   if(login.error){
-     toast.error('Login credentials invalid...');
-   }
+  if (login.error) {
+    toast.error('Login credentials invalid...');
+  }
 
   return (
     <>
-      <div className="h-[30rem] mt-4">
+      <div className="h-[30rem] mt-12 min-h-screen">
         <div className="m-auto p-4 w-fit rounded-lg border border-gray-200 bg-gray-200/40 sm:p-6 sm:w-96 lg:p-8 dark:bg-slate-800 dark:border-gray-700">
           <form
             className="space-y-6"
