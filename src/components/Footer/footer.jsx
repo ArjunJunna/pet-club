@@ -3,7 +3,7 @@ import React from 'react'
 export const Footer = () => {
   return (
     <>
-      <footer className="w-full flex justify-around items-center py-3 border-b-[0.1px] mt-3 border-gray-700 dark:bg-slate-900">
+      <footer className="w-full flex max-sm:flex-col max-sm:gap-3 justify-around items-center py-3 border-b-[0.1px] mt-3 border-gray-700 dark:bg-slate-900">
         <img
           src="../assets/images/petclub.png"
           alt="logo"
